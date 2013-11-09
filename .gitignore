@@ -1,7 +1,7 @@
 lib/
 target/
 project/
-.gitattributes.txt
+/.gitattributes
 *.log
 *.sublime-workspace
 *.sublime-project
