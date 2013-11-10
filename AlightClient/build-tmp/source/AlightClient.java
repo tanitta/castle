@@ -33,18 +33,18 @@ public void setup()
 
 public void draw(){}
 
-// void clientEvent(Client c){
-// 	String s = c.readString();
-// 	if(s != null){
-// 		println("client received: " + s);
-// 	}
-// }
+public void clientEvent(Client c){
+	String s = c.readString();
+	if(s != null){
+		println("client received: " + s);
+	}
+}
 
-// void mouseClicked(){
-// 	String s = "(" + mouseX + ", " + mouseY + ") was clicked";
-// 	println(s);
-// 	cl.write(s);
-// }
+public void mouseClicked(){
+	String s = id + " " + mouseX + " " + mouseY + " " +  0 + "\n";
+	println(s);
+	cl.write(s);
+}
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "AlightClient" };
     if (passedArgs != null) {

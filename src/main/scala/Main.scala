@@ -9,13 +9,15 @@ object Main extends processing.core.PApplet{
 	var scene = new BaseScene(this)
 	var network = new Network(this)
 	override def setup = {
-		size(displayWidth,displayHeight)
+		// size(displayWidth,displayHeight)
+		size(500,500)
 		noCursor()
 		
 		scene.setup
 	}
 	
 	def update = {
+		network.update
 		scene.update
 		
 	}
@@ -36,6 +38,6 @@ object Main extends processing.core.PApplet{
 	}
 	
 	override def sketchFullScreen():Boolean = {
-  		return true
+  		return false
 	}
 }

@@ -2,7 +2,7 @@
 import processing.net.*;
 
 Client cl;
-
+int id = 0;
 
 void setup() 
 {
@@ -15,15 +15,15 @@ void setup()
 
 void draw(){}
 
-// void clientEvent(Client c){
-// 	String s = c.readString();
-// 	if(s != null){
-// 		println("client received: " + s);
-// 	}
-// }
+void clientEvent(Client c){
+	String s = c.readString();
+	if(s != null){
+		println("client received: " + s);
+	}
+}
 
-// void mouseClicked(){
-// 	String s = "(" + mouseX + ", " + mouseY + ") was clicked";
-// 	println(s);
-// 	cl.write(s);
-// }
+void mouseClicked(){
+	String s = id + " " + mouseX + " " + mouseY + "\n";
+	println(s);
+	cl.write(s);
+}
