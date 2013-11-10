@@ -7,6 +7,7 @@ import fullscreen._
 
 object Main extends processing.core.PApplet{
 	var scene = new BaseScene(this)
+	var network = new Network(this)
 	override def setup = {
 		size(displayWidth,displayHeight)
 		noCursor()
