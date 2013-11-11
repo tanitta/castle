@@ -10,7 +10,7 @@ object Main extends processing.core.PApplet{
 	var network = new Network(this)
 	override def setup = {
 		// size(displayWidth,displayHeight)
-		size(500,500)
+		size(255,255)
 		noCursor()
 		
 		scene.setup
@@ -28,8 +28,8 @@ object Main extends processing.core.PApplet{
 		if(keyCode==PConstants.ESC){
 			exit()
 		}
-		
 		scene.draw
+		network.draw
 		
 	}
 	
@@ -39,5 +39,8 @@ object Main extends processing.core.PApplet{
 	
 	override def sketchFullScreen():Boolean = {
   		return false
+	}
+	def receive(data:Array[Int]){
+		network.receive(data)
 	}
 }
