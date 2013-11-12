@@ -40,7 +40,7 @@ object Main extends processing.core.PApplet{
 	override def sketchFullScreen():Boolean = {
   		return false
 	}
-	def receive(data:Array[Int]){
+	def receive(data:Array[Byte]){
 		network.receive(data)
 	}
 }

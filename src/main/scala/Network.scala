@@ -29,23 +29,28 @@ class Network(var ps:PApplet){
 	}
 	
 	def draw = {
-		
+		var id = 0
+		if(drawers(id).isDraw == 1){
+			ps.line(drawers(id).mouseX,drawers(id).mouseY,drawers(id).pmouseX,drawers(id).pmouseY)
+		}
+		drawers(id).pmouseX = drawers(id).mouseX
+		drawers(id).pmouseY = drawers(id).mouseY
 		
 	}
 	
-	def receive(data: Array[Int]){
+	def receive(data: Array[Byte]){
 		var id = data(0).toInt
-		drawers(id).mouseX = data(1).toInt
-		drawers(id).mouseY = data(2).toInt
-		drawers(id).pmouseX = data(3).toInt
-		drawers(id).pmouseY = data(4).toInt
+		drawers(id).mouseX = data(1).toInt + 128*data(3).toInt
+		drawers(id).mouseY = data(2).toInt + 128*data(4).toInt
+		
 		drawers(id).isDraw = data(5).toInt
 		
 	
 		var x = drawers(id).mouseX
 		var y = drawers(id).mouseY
-		if(drawers(id).isDraw == 1){
-			ps.line(drawers(id).mouseX,drawers(id).mouseY,drawers(id).pmouseX,drawers(id).pmouseY)
-		}
+		
+		
+		
+		
 	}
 }
