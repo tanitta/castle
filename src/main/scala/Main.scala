@@ -2,24 +2,40 @@ package trit.alight
 import trit.alight._
 import processing.core._
 import fullscreen._
-
+import scala.collection.mutable.LinkedList
 
 
 object Main extends processing.core.PApplet{
-	var scene = new BaseScene(this)
+	var sound = new Sound(this)
 	var network = new Network(this)
+	
+	
+	// var scenes = LinkedList.empty[BaseScene]
+	
+	// var sceneFire = new Fire(this)
+	
+	
+	var scene = new BaseScene(this)
+	scene.setSound(sound)
+	scene.setNetwork(network)
+	
 	override def setup = {
-		// size(displayWidth,displayHeight)
-		size(255,255)
+		size(displayWidth,displayHeight)
+		// size(255,255)
 		noCursor()
 		
+		
 		scene.setup
+		
 	}
 	
 	def update = {
 		network.update
+		sound.update
+		
 		scene.update
 		
+		println("ok")
 	}
 	
 	override def draw = {
@@ -28,9 +44,7 @@ object Main extends processing.core.PApplet{
 		if(keyCode==PConstants.ESC){
 			exit()
 		}
-		scene.draw
-		network.draw
-		
+		scene.draw	
 	}
 	
 	def main(args: Array[String]){
@@ -38,7 +52,7 @@ object Main extends processing.core.PApplet{
 	}
 	
 	override def sketchFullScreen():Boolean = {
-  		return false
+  		return true
 	}
 	def receive(data:Array[Byte]){
 		network.receive(data)
