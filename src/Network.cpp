@@ -2,8 +2,6 @@
 
 // void alight::Network::Network(){
 // 	count = 0;
-// 	// udpConnection.Create();
-// 	// udpConnection.Connect("224.0.0.0",6000);
 // };
 
 // void alight::Network::threadedFunction(){
@@ -17,7 +15,6 @@
 // 	}
 // };
 	
-// v
-oid alight::Network::draw(){
+// void alight::Network::draw(){
 // 		ofDrawBitmapString(ofToString(count), 350, 56);
 // };

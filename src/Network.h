@@ -1,36 +1,110 @@
-#pragma once
-#include "ofxUDPManager.h"
-#include "ofMain.h"
-namespace alight{
-	class Network : public ofThread{
-		public:
-			int count;
-			Network(){
-				count = 0;
-			};
+// #pragma once
+// #include "ofxUDPManager.h"
+// #include "ofMain.h"
+// namespace alight{
+// 	class Network : public ofThread{
+// 		public:
+// 			int count;
+// 			Network(){
+// 				count = 0;
+// 			};
 
-			void start(){
-	            startThread(true, false);   // blocking, verbose
-	        }
+// 			void start(){
+// 	            startThread(true, false);   // blocking, verbose
+// 	        }
 
-	        void stop(){
-	            stopThread();
-	        }
+// 	        void stop(){
+// 	            stopThread();
+// 	        }
 
-			void threadedFunction(){
-				while( isThreadRunning() != 0 ){
-					if( lock() ){
-						count++;
-						if(count > 50000) count = 0;
-						unlock();
-						ofSleepMillis(1 * 1000);
-					}
-				}
-			};
-			void draw();
+// 			void threadedFunction(){
+// 				while( isThreadRunning() != 0 ){
+// 					if( lock() ){
+// 						count++;
+// 						if(count > 50000) count = 0;
+// 						unlock();
+// 						ofSleepMillis(1 * 1000);
+// 					}
+// 				}
+// 			};
+// 			void draw();
 			
+// 		private:
+// 			ofxUDPManager udpConnection();
+// 			// 
+// 	};
+// }
+
+#ifndef _THREADED_OBJECT
+#define _THREADED_OBJECT
+
+#include "ofMain.h"
+#include "ofxUDPManager.h"
+// this is not a very exciting example yet
+// but ofThread provides the basis for ofNetwork and other
+// operations that require threading.
+//
+// please be careful - threading problems are notoriously hard
+// to debug and working with threads can be quite difficult
+
+
+class Network : public ofThread{
+
+	public:
+
+
+	    int count;  // threaded fucntions that share data need to use lock (mutex)
+	                // and unlock in order to write to that data
+	                // otherwise it's possible to get crashes.
+	                //
+	                // also no opengl specific stuff will work in a thread...
+	                // threads can't create textures, or draw stuff on the screen
+	                // since opengl is single thread safe
+
+		//--------------------------
+		Network(){
+			count = 0;
+			udpConnection.Create();
+			udpConnection.Connect("224.0.0.0",6000);
+		}
+
+		void start(){
+            startThread(true, false);   // blocking, verbose
+        }
+
+        void stop(){
+            stopThread();
+        }
+
+		//--------------------------
+		void threadedFunction(){
+
+			while( isThreadRunning() != 0 ){
+				if( lock() ){
+					count++;
+					if(count > 50000) count = 0;
+					unlock();
+					ofSleepMillis(1 * 1000);
+				}
+			}
+		}
+
+		//--------------------------
+		void draw(){
+
+			string str = "I am a slowly increasing thread. \nmy current count is: ";
+
+			if( lock() ){
+				str += ofToString(count);
+				unlock();
+			}else{
+				str = "can't lock!\neither an error\nor the thread has stopped";
+			}
+			ofDrawBitmapString(str, 50, 56);
+		}
+
 		private:
-			ofxUDPManager udpConnection();
-			// 
-	};
-}
+			ofxUDPManager udpConnection;
+};
+
+#endif
