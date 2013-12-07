@@ -47,6 +47,10 @@ class Network : public ofThread{
 				if( lock() ){
 					count++;
 					udpConnection.Receive(udpMessage,10);
+					int id = (int)udpMessage[0];
+					drawers[id].mouseX = (int)udpMessage[1] + 128*(int)udpMessage[3];
+					drawers[id].mouseY = (int)udpMessage[2] + 128*(int)udpMessage[4];
+					drawers[id].isDraw = (int)udpMessage[5];
 					// if(count > 50000) count = 0;
 					unlock();
 					ofSleepMillis(1 * 10);
@@ -61,7 +65,13 @@ class Network : public ofThread{
 
 			if( lock() ){
 				str += ofToString(count) + "\n";
-				str += "data[0] : " + ofToString((int)udpMessage[1]);
+				for (int i = 0; i < 4; i++)
+				{
+					str += "drawers[" + ofToString(i) + "]\n";
+					str += "mouseX : " + ofToString(drawers[i].mouseX) + "\n";
+					str += "mouseY : " + ofToString(drawers[i].mouseY) + "\n";
+					str += "isDraw : " + ofToString(drawers[i].isDraw) + "\n\n";
+				}
 				unlock();
 			}else{
 				str = "can't lock!\neither an error\nor the thread has stopped";
@@ -72,4 +82,12 @@ class Network : public ofThread{
 		private:
 			ofxUDPManager udpConnection;
 			char udpMessage[10];
+			
+			struct Drawer
+			{
+					int mouseX;
+					int mouseY;
+					int isDraw;
+			};
+			Drawer drawers[5];
 };
