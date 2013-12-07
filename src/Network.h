@@ -1,42 +1,4 @@
-// #pragma once
-// #include "ofxUDPManager.h"
-// #include "ofMain.h"
-// namespace alight{
-// 	class Network : public ofThread{
-// 		public:
-// 			int count;
-// 			Network(){
-// 				count = 0;
-// 			};
-
-// 			void start(){
-// 	            startThread(true, false);   // blocking, verbose
-// 	        }
-
-// 	        void stop(){
-// 	            stopThread();
-// 	        }
-
-// 			void threadedFunction(){
-// 				while( isThreadRunning() != 0 ){
-// 					if( lock() ){
-// 						count++;
-// 						if(count > 50000) count = 0;
-// 						unlock();
-// 						ofSleepMillis(1 * 1000);
-// 					}
-// 				}
-// 			};
-// 			void draw();
-			
-// 		private:
-// 			ofxUDPManager udpConnection();
-// 			// 
-// 	};
-// }
-
-#ifndef _THREADED_OBJECT
-#define _THREADED_OBJECT
+#pragma once
 
 #include "ofMain.h"
 #include "ofxUDPManager.h"
@@ -65,7 +27,9 @@ class Network : public ofThread{
 		Network(){
 			count = 0;
 			udpConnection.Create();
-			udpConnection.Connect("224.0.0.0",6000);
+			udpConnection.BindMcast("224.0.0.0",6000);
+			udpConnection.SetNonBlocking(true);
+			// udpConnection.Bind(6000);
 		}
 
 		void start(){
@@ -82,9 +46,10 @@ class Network : public ofThread{
 			while( isThreadRunning() != 0 ){
 				if( lock() ){
 					count++;
-					if(count > 50000) count = 0;
+					udpConnection.Receive(udpMessage,10);
+					// if(count > 50000) count = 0;
 					unlock();
-					ofSleepMillis(1 * 1000);
+					ofSleepMillis(1 * 10);
 				}
 			}
 		}
@@ -95,7 +60,8 @@ class Network : public ofThread{
 			string str = "I am a slowly increasing thread. \nmy current count is: ";
 
 			if( lock() ){
-				str += ofToString(count);
+				str += ofToString(count) + "\n";
+				str += "data[0] : " + ofToString((int)udpMessage[1]);
 				unlock();
 			}else{
 				str = "can't lock!\neither an error\nor the thread has stopped";
@@ -105,6 +71,5 @@ class Network : public ofThread{
 
 		private:
 			ofxUDPManager udpConnection;
+			char udpMessage[10];
 };
-
-#endif

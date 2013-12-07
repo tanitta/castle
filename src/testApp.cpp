@@ -12,6 +12,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
+	ofSetHexColor(0x000000);
 	network.draw();
 }
 
