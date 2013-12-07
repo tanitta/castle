@@ -50,10 +50,11 @@ class Network : public ofThread{
 					int id = (int)udpMessage[0];
 					drawers[id].mouseX = (int)udpMessage[1] + 128*(int)udpMessage[3];
 					drawers[id].mouseY = (int)udpMessage[2] + 128*(int)udpMessage[4];
-					drawers[id].isDraw = (int)udpMessage[5];
-					// if(count > 50000) count = 0;
+						drawers[id].isDraw = (int)udpMessage[5];
+					// if(count > 50000) count = 0;	/* code */
+					
 					unlock();
-					ofSleepMillis(1 * 10);
+					ofSleepMillis(1);
 				}
 			}
 		}
