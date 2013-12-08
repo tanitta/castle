@@ -3,7 +3,8 @@
 #include "ofMain.h"
 #include "Network.h"
 #include "Sound.h"
-
+#include "ofxUI.h"
+#include "UI.h"
 class testApp : public ofBaseApp{
 	public:
 		void setup();
@@ -20,7 +21,11 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		alight::UI ui;
+	    void exit(); 
+    	void guiEvent(ofxUIEventArgs &e);
+		
 		// alight::Network network;
-		Network network;
+		alight::Network network;
 		
 };

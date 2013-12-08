@@ -58,7 +58,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofx3DModelLoader\libs;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxGui\libs;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxNetwork\libs;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorGraphics\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofx3DModelLoader\libs;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxGui\libs;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxNetwork\libs;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorGraphics\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxUI\libs;..\..\..\addons\ofxUI\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -75,7 +75,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofx3DModelLoader\libs;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxGui\libs;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxNetwork\libs;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorGraphics\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofx3DModelLoader\libs;..\..\..\addons\ofx3DModelLoader\src;..\..\..\addons\ofx3DModelLoader\src\3DS;..\..\..\addons\ofxGui\libs;..\..\..\addons\ofxGui\src;..\..\..\addons\ofxNetwork\libs;..\..\..\addons\ofxNetwork\src;..\..\..\addons\ofxVectorGraphics\libs;..\..\..\addons\ofxVectorGraphics\src;..\..\..\addons\ofxXmlSettings\libs;..\..\..\addons\ofxXmlSettings\src;..\..\..\addons\ofxUI\libs;..\..\..\addons\ofxUI\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Network.cpp" />
     <ClCompile Include="src\testApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.cpp" />
     <ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\3DS\texture3DS.cpp" />
@@ -109,8 +110,40 @@
     <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp" />
     <ClCompile Include="..\..\..\addons\ofxVectorGraphics\src\ofxVectorGraphics.cpp" />
     <ClCompile Include="..\..\..\addons\ofxVectorGraphics\libs\CreEPS.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Sound.h" />
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\texture3DS.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\Vector3DS.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DBaseLoader.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DModelLoader.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h" />
+    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h" />
+    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\src\ofxVectorGraphics.h" />
+    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\libs\CreEPS.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\libs\CreEPS_Types.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI.h" />
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DGraph.h" />
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" />
@@ -159,30 +192,7 @@
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWaveform.h" />
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidget.h" />
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
-    <ClInclude Include="src\testApp.h" />
-    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.h" />
-    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\texture3DS.h" />
-    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\Vector3DS.h" />
-    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DBaseLoader.h" />
-    <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\ofx3DModelLoader.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
-    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h" />
-    <ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h" />
-    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\src\ofxVectorGraphics.h" />
-    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\libs\CreEPS.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxVectorGraphics\libs\CreEPS_Types.hpp" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

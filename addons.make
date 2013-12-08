@@ -2,3 +2,5 @@ ofx3DModelLoader
 ofxGui
 ofxNetwork
 ofxVectorGraphics
+ofxXmlSettings
+ofxUI
