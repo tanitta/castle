@@ -14,9 +14,21 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
 	ofSetHexColor(0x000000);
 	network.draw();
+	alight::Drawer *obj;
+	obj = network.GetHanDrawer();
+	
+	ofSetHexColor(0xFFFFFF);	
+	string str;
+	for (int i = 0; i < 4; i++)
+	{
+		str += "drawers[" + ofToString(i) + "]\n";
+		str += "mouseX : " + ofToString(obj[i].mouseX) + "\n";
+		str += "mouseY : " + ofToString(obj[i].mouseY) + "\n";
+		str += "isDraw : " + ofToString(obj[i].isDraw) + "\n\n";
+	}
+	ofDrawBitmapString(str, 20, 256);
 }
 
 //--------------------------------------------------------------

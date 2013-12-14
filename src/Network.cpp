@@ -25,23 +25,24 @@ void alight::Network::threadedFunction(){
 	}
 };
 
-alight::Network::Drawer *alight::Network::GetHanDrawer(){
+alight::Drawer *alight::Network::GetHanDrawer(){
 	return drawers;
 };
 
 void alight::Network::draw(){
 	string str = "I am a slowly increasing thread. \nmy current count is: ";
+	ofSetHexColor(0xFFFFFF);	
 
 	if( lock() ){
-		// str += ofToString(count) + "\n";
-		// for (int i = 0; i < 4; i++)
-		// {
-		// 	str += "drawers[" + ofToString(i) + "]\n";
-		// 	str += "mouseX : " + ofToString(drawers[i].mouseX) + "\n";
-		// 	str += "mouseY : " + ofToString(drawers[i].mouseY) + "\n";
-		// 	str += "isDraw : " + ofToString(drawers[i].isDraw) + "\n\n";
-		// }
-		// unlock();
+		str += ofToString(count) + "\n";
+		for (int i = 0; i < 4; i++)
+		{
+			// str += "drawers[" + ofToString(i) + "]\n";
+			// str += "mouseX : " + ofToString(drawers[i].mouseX) + "\n";
+			// str += "mouseY : " + ofToString(drawers[i].mouseY) + "\n";
+			// str += "isDraw : " + ofToString(drawers[i].isDraw) + "\n\n";
+		}
+		unlock();
 	}else{
 		str = "can't lock!\neither an error\nor the thread has stopped";
 	}

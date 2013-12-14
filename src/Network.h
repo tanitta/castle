@@ -10,6 +10,11 @@
 // to debug and working with threads can be quite difficult
 
 namespace alight{
+	struct Drawer{
+			int mouseX;
+			int mouseY;
+			int isDraw;
+	};
 	class Network : public ofThread{
 
 		public:
@@ -38,13 +43,8 @@ namespace alight{
 			void threadedFunction();
 
 			//--------------------------
-			struct Drawer
-			{
-					int mouseX;
-					int mouseY;
-					int isDraw;
-			};
-			Drawer *GetHanDrawer();
+			
+			alight::Drawer *GetHanDrawer();
 			
 			void draw();
 
