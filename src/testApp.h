@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Network.h"
 #include "Sound.h"
+#include "SceneControl.h"
 #include "ofxUI.h"
 #include "ui/UI.h"
 class testApp : public ofBaseApp{
@@ -27,5 +28,8 @@ class testApp : public ofBaseApp{
 		
 		// alight::Network network;
 		alight::Network network;
+		alight::Sound sound;
+		
+		alight::SceneControl sceneControl;
 		
 };

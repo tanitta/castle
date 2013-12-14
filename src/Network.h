@@ -17,42 +17,42 @@ namespace alight{
 	};
 	class Network : public ofThread{
 
-		public:
+	public:
 
 
-		    int count;  // threaded fucntions that share data need to use lock (mutex)
-		                // and unlock in order to write to that data
-		                // otherwise it's possible to get crashes.
-		                //
-		                // also no opengl specific stuff will work in a thread...
-		                // threads can't create textures, or draw stuff on the screen
-		                // since opengl is single thread safe
+    int count;  // threaded fucntions that share data need to use lock (mutex)
+                // and unlock in order to write to that data
+                // otherwise it's possible to get crashes.
+                //
+                // also no opengl specific stuff will work in a thread...
+                // threads can't create textures, or draw stuff on the screen
+                // since opengl is single thread safe
 
-			//--------------------------
-			Network();
+	//--------------------------
+	Network();
 
-			void start(){
-	            startThread(true, false);   // blocking, verbose
-	        }
+	void start(){
+        startThread(true, false);   // blocking, verbose
+    }
 
-	        void stop(){
-	            stopThread();
-	        }
+    void stop(){
+        stopThread();
+    }
 
-			//--------------------------
-			void threadedFunction();
+	//--------------------------
+	void threadedFunction();
 
-			//--------------------------
-			
-			alight::Drawer *GetHanDrawer();
-			
-			void draw();
+	//--------------------------
+	
+	alight::Drawer *GetHanDrawer();
+	
+	void draw();
 
-			private:
-				ofxUDPManager udpConnection;
-				char udpMessage[10];
-				
-				
-				Drawer drawers[5];
+	private:
+		ofxUDPManager udpConnection;
+		char udpMessage[10];
+		
+		
+		Drawer drawers[5];
 	};
 }

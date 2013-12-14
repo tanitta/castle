@@ -76,6 +76,12 @@
     <ClCompile Include="src\ui\UI.cpp">
       <Filter>src\ui</Filter>
     </ClCompile>
+    <ClCompile Include="src\SceneControl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sound.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -361,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="src\ui\UI.h">
       <Filter>src\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneControl.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

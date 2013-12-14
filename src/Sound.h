@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ofMain.h"
 namespace alight{
 	class Sound{
 		public:
@@ -8,6 +8,5 @@ namespace alight{
 
 			void setup();
 			void update();
-			void draw();
 	};
 }

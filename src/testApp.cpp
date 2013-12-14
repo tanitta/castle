@@ -4,18 +4,21 @@
 void testApp::setup(){
 	network.start();
 	ui.setup();
-
+	sceneControl.setup();
+	sceneControl.SetHanDrawers(network.GetHanDrawer());
+	sceneControl.SetHanSound(&sound);
+	
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-
+	sceneControl.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 	ofSetHexColor(0x000000);
-	network.draw();
+	// network.draw();
 	alight::Drawer *obj;
 	obj = network.GetHanDrawer();
 	
