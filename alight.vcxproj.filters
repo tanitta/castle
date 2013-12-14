@@ -70,11 +70,11 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Network.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\UI.cpp">
+      <Filter>src\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +128,9 @@
     </Filter>
     <Filter Include="addons\ofxUI\src">
       <UniqueIdentifier>{A00C2D23-6C11-BC86-3993-2CF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ui">
+      <UniqueIdentifier>{c58e9acd-b36c-4202-b994-9fe1b96bdfd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -353,11 +356,11 @@
     <ClInclude Include="..\..\..\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
       <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\UI.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Sound.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\UI.h">
+      <Filter>src\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

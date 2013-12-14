@@ -1,8 +1,8 @@
 #include "UI.h"
-alight::UI::UI(){};
-alight::UI::~UI(){};
+alight::ui::UI::UI(){};
+alight::ui::UI::~UI(){};
 
-void alight::UI::setup(){
+void alight::ui::UI::setup(){
 	ofEnableSmoothing(); 
 	ofBackground(32); 
 	
@@ -10,7 +10,7 @@ void alight::UI::setup(){
 	set2();
 };
 
-void alight::UI::exit()
+void alight::ui::UI::exit()
 {
     gui1->saveSettings("GUI/guiSettings1.xml"); 
     gui2->saveSettings("GUI/guiSettings2.xml"); 
@@ -18,7 +18,7 @@ void alight::UI::exit()
     delete gui2; 
 }
 
-void alight::UI::Event(ofxUIEventArgs &e)
+void alight::ui::UI::Event(ofxUIEventArgs &e)
 {
 // 	string name = e.widget->getName(); 
 // 	int kind = e.widget->getKind(); 
@@ -75,10 +75,10 @@ void alight::UI::Event(ofxUIEventArgs &e)
 //     }
 }
 
-void alight::UI::keyPressed(int key){
+void alight::ui::UI::keyPressed(int key){
 }
 
-void alight::UI::set1(){
+void alight::ui::UI::set1(){
 	gui1 = new ofxUICanvas();
 	
     gui1->setFont("fonts/frabk.ttf"); 
@@ -128,7 +128,7 @@ void alight::UI::set1(){
 	
 };
 
-void alight::UI::set2(){
+void alight::ui::UI::set2(){
 	float xInit = 0; 
     float length = 255-xInit; 
 	gui2 = new ofxUIScrollableCanvas(255, 0, 127, ofGetHeight());
