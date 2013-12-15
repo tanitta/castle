@@ -82,6 +82,9 @@
     <ClCompile Include="src\Sound.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\BaseScene.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -137,6 +140,9 @@
     </Filter>
     <Filter Include="src\ui">
       <UniqueIdentifier>{c58e9acd-b36c-4202-b994-9fe1b96bdfd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\scenes">
+      <UniqueIdentifier>{4ec736da-302b-476a-aa29-b63722d6cb3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="src\SceneControl.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\BaseScene.h">
+      <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

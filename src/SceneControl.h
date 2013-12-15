@@ -2,6 +2,7 @@
 #include "ofMain.h"
 #include "Sound.h"
 #include "Network.h"
+#include "scenes/BaseScene.h"
 namespace alight{
 	class SceneControl{
 	public:
@@ -24,5 +25,7 @@ namespace alight{
 		
 		alight::Drawer* hanDrawers;
 		void SetHanDrawers(alight::Drawer *han);
+	private:
+		alight::scenes::BaseScene* scenes[8];
 	};
 }
