@@ -35,8 +35,8 @@ void testApp::draw(){
 		str += "isDraw : " + ofToString(obj[i].isDraw) + "\n\n";
 	}
 	ofDrawBitmapString(str, 20, 256);
-	int w = 8;
-	int max = 64+32;//(int)(BUFFER_SIZE/2);
+	int w = 2;
+	int max = 256;//(int)(BUFFER_SIZE/2);
 	for (int i = 1; i < max; i++){
 		ofLine(400+(i*w),400,400+(i*w),400-sound.magnitude[i]*10.0f);
 	}

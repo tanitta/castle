@@ -2,7 +2,7 @@
 #include "ofMain.h"
 #include "fft.h"
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2048
 #define NUM_WINDOWS 80
 
 namespace alight{
