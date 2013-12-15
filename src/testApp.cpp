@@ -38,10 +38,10 @@ void testApp::draw(){
 	int w = 8;
 	int max = 64+32;//(int)(BUFFER_SIZE/2);
 	for (int i = 1; i < max; i++){
-		ofLine(200+(i*w),400,200+(i*w),400-sound.magnitude[i]*10.0f);
+		ofLine(400+(i*w),400,400+(i*w),400-sound.magnitude[i]*10.0f);
 	}
-	ofLine(200+(1*w),400,200+(1*w),400+5);
-	ofLine(200+(max*w),400,200+(max*w),400+5);
+	ofLine(400+(1*w),400,400+(1*w),400+5);
+	ofLine(400+(max*w),400,400+(max*w),400+5);
 }
 
 //--------------------------------------------------------------
