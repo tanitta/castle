@@ -6,6 +6,8 @@
 #include "SceneControl.h"
 #include "ofxUI.h"
 #include "ui/UI.h"
+
+
 class testApp : public ofBaseApp{
 	public:
 		void setup();
@@ -21,6 +23,7 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void audioReceived(float *input, int bufferSize, int nChannels); 
 		
 		alight::ui::UI ui;
 	    void exit(); 

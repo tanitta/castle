@@ -20,7 +20,7 @@ void alight::Network::threadedFunction(){
 			// if(count > 50000) count = 0;	/* code */
 			
 			unlock();
-			ofSleepMillis(1);
+			ofSleepMillis(10);
 		}
 	}
 };

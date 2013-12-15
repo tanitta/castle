@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	network.start();
+	sound.setup(this);
+	sound.start();	
 	ui.setup();
 	sceneControl.setup();
 	sceneControl.SetHanDrawers(network.GetHanDrawer());
@@ -12,6 +14,7 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
+	// sound.update();
 	sceneControl.update();
 }
 
@@ -32,6 +35,13 @@ void testApp::draw(){
 		str += "isDraw : " + ofToString(obj[i].isDraw) + "\n\n";
 	}
 	ofDrawBitmapString(str, 20, 256);
+	int w = 8;
+	int max = 64+32;//(int)(BUFFER_SIZE/2);
+	for (int i = 1; i < max; i++){
+		ofLine(200+(i*w),400,200+(i*w),400-sound.magnitude[i]*10.0f);
+	}
+	ofLine(200+(1*w),400,200+(1*w),400+5);
+	ofLine(200+(max*w),400,200+(max*w),400+5);
 }
 
 //--------------------------------------------------------------
@@ -88,4 +98,8 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+void testApp::audioReceived(float * input, int bufferSize, int nChannels){ 
+	sound.audioReceived(input, bufferSize, nChannels);
 }

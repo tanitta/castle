@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\fft.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Network.cpp" />
     <ClCompile Include="src\SceneControl.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="src\ui\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\fft.h" />
     <ClInclude Include="src\SceneControl.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
     <ClInclude Include="src\Sound.h" />
