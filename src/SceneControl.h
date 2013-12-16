@@ -3,6 +3,8 @@
 #include "Sound.h"
 #include "Network.h"
 #include "scenes/BaseScene.h"
+#include "scenes/Pause.h"
+
 namespace alight{
 	class SceneControl{
 	public:

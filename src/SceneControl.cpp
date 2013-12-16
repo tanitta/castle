@@ -1,9 +1,14 @@
 #include "SceneControl.h"
-alight::SceneControl::SceneControl(){};
+alight::SceneControl::SceneControl(){
+	//add scene to scenes(array) here 
+	scenes[0] = new alight::scenes::Pause(hanSound,hanDrawers);
+};
 alight::SceneControl::~SceneControl(){};
 
 void alight::SceneControl::setup(){};
-void alight::SceneControl::update(){};
+void alight::SceneControl::update(){
+	scenes[0]->update();
+};
 
 ofImage alight::SceneControl::GetSceneMain(){
 	return imageMain;

@@ -95,6 +95,7 @@
     <ClCompile Include="src\Network.cpp" />
     <ClCompile Include="src\SceneControl.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
+    <ClCompile Include="src\scenes\Pause.cpp" />
     <ClCompile Include="src\Sound.cpp" />
     <ClCompile Include="src\testApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="src\fft.h" />
     <ClInclude Include="src\SceneControl.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
+    <ClInclude Include="src\scenes\Pause.h" />
     <ClInclude Include="src\Sound.h" />
     <ClInclude Include="src\testApp.h" />
     <ClInclude Include="..\..\..\addons\ofx3DModelLoader\src\3DS\model3DS.h" />

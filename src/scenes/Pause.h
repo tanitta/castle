@@ -1,12 +1,13 @@
 #pragma once
 #include "../Sound.h"
 #include "../Network.h"
+#include "BaseScene.h"
 namespace alight{
 namespace scenes{
-	class BaseScene{
+	class Pause : public alight::scenes::BaseScene{
 	public:
-		BaseScene();
-		~BaseScene();
+		Pause(alight::Sound *hanSound, alight::Drawer *hanDrawers);
+		~Pause();
 	
 		virtual void setup();
 		virtual void update();

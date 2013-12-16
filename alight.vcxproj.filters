@@ -88,6 +88,9 @@
     <ClCompile Include="src\fft.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Pause.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="src\fft.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Pause.h">
+      <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

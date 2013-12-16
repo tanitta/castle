@@ -20,7 +20,7 @@ namespace alight{
 	};
 	void Sound::update(){
 		while( isThreadRunning() != 0 ){
-			cout << (this->left[0]+this->right[0])*0.5 <<"\n";
+			// cout << (this->left[0]+this->right[0])*0.5 <<"\n";
 			static int index=0;
 			float avg_power = 0.0f;	
 			if(index < NUM_WINDOWS)
