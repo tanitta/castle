@@ -13,8 +13,16 @@ void alight::SceneControl::update(){
 	scenes[0]->update();
 };
 
+void alight::SceneControl::draw(){
+	scenes[0]->draw();
+};
+
 ofImage alight::SceneControl::GetSceneMain(){
 	return imageMain;
+};
+
+void alight::SceneControl::SetSceneMain(){
+	// imageMain.grabScreen(0, 0, 1024, 768);
 };
 
 ofImage alight::SceneControl::GetSceneSub(){

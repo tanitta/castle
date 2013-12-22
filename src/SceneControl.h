@@ -13,12 +13,15 @@ namespace alight{
 	
 		void update();
 		void setup();
+		void draw();
 		
 		ofImage imageMain;
 		ofImage imageSub;
 		
 		ofImage GetSceneMain();
 		ofImage GetSceneSub();
+		
+		void SetSceneMain();
 		
 		void ExchangeScene();
 		

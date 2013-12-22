@@ -13,11 +13,10 @@ namespace scenes{
 	
 	void Pause::update(){
 			cout << "Pause.updated!" <<"\n";
-		
 	};	
 	
 	void Pause::draw(){
-		
+		ofRect(500, 500, 50, 50);
 	};	
 };
 };

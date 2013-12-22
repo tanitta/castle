@@ -3,6 +3,7 @@ alight::ui::UI::UI(){};
 alight::ui::UI::~UI(){};
 
 void alight::ui::UI::setup(){
+    fontPath = "fonts/Helvetica.ttf";
 	ofEnableSmoothing(); 
 	ofBackground(32); 
 	
@@ -81,7 +82,7 @@ void alight::ui::UI::keyPressed(int key){
 void alight::ui::UI::set1(){
 	gui1 = new ofxUICanvas();
 	
-    gui1->setFont("fonts/frabk.ttf"); 
+    gui1->setFont(fontPath); 
     
     gui1->addLabel("alight", OFX_UI_FONT_LARGE);
     gui1->addSpacer(); 
@@ -90,37 +91,7 @@ void alight::ui::UI::set1(){
     gui1->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
     
     gui1->addSpacer(); 
-    gui1->addLabel("Network", OFX_UI_FONT_LARGE);
 
-	vector<float> buffer1;
-	vector<float> buffer2;
-	vector<float> buffer3;
-	vector<float> buffer4; 
-    for(int i = 0; i < 256; i++)
-    {
-        buffer1.push_back(0.0);
-        buffer2.push_back(0.0);
-        buffer3.push_back(0.0);
-        buffer4.push_back(0.0);
-    }
-    
-    float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
-    float length = 255-xInit; 
-    
-    gui1->addLabel("drawer1", OFX_UI_FONT_MEDIUM);
-	gui1->add2DPad("PAD1Drawer", ofPoint(0,length-xInit), ofPoint(0,120), ofPoint((length-xInit)*.5,120*.5), length-xInit,120);
-    
-    gui1->addLabel("drawer2", OFX_UI_FONT_MEDIUM);
-	gui1->add2DPad("PAD2Drawer", ofPoint(0,length-xInit), ofPoint(0,120), ofPoint((length-xInit)*.5,120*.5), length-xInit,120);
-    
-    gui1->addLabel("drawer3", OFX_UI_FONT_MEDIUM);
-	gui1->add2DPad("PAD3Drawer", ofPoint(0,length-xInit), ofPoint(0,120), ofPoint((length-xInit)*.5,120*.5), length-xInit,120);
-   	
-    gui1->addLabel("drawer4", OFX_UI_FONT_MEDIUM);
-	gui1->add2DPad("PAD4Drawer", ofPoint(0,length-xInit), ofPoint(0,120), ofPoint((length-xInit)*.5,120*.5), length-xInit,120);
-    
-    
-    
     
     gui1->autoSizeToFitWidgets(); 
     ofAddListener(gui1->newGUIEvent, this, &UI::Event); 
@@ -132,7 +103,7 @@ void alight::ui::UI::set2(){
 	float xInit = 0; 
     float length = 255-xInit; 
 	gui2 = new ofxUIScrollableCanvas(255, 0, 127, ofGetHeight());
-    gui2->setFont("fonts/frabk.ttf"); 
+    gui2->setFont(fontPath); 
 	
     gui2->addLabel("Theme", OFX_UI_FONT_LARGE);
     

@@ -19,7 +19,7 @@ namespace alight{
 			void set2();
 			ofxUICanvas *gui1;
 
-			
+			char* fontPath;
 			
 			ofxUIScrollableCanvas *gui2; 
 			
