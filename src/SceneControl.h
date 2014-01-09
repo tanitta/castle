@@ -5,6 +5,8 @@
 #include "scenes/BaseScene.h"
 #include "scenes/Pause.h"
 
+#define DISP1_W
+#define DISP1_H 
 namespace alight{
 	class SceneControl{
 	public:

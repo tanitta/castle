@@ -26,7 +26,7 @@ void testApp::draw(){
 	ofSetHexColor(0x000000);
 	// network.draw();
 	
-	// sceneControl.draw();
+	sceneControl.draw();
 	// sceneControl.SetSceneMain();
 	
 	// alight::Drawer *obj;

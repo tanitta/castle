@@ -14,7 +14,10 @@ void alight::SceneControl::update(){
 };
 
 void alight::SceneControl::draw(){
-	scenes[0]->draw();
+	ofPushMatrix();
+		ofTranslate(10.0,0,0);
+		scenes[0]->draw();
+    ofPopMatrix();
 };
 
 ofImage alight::SceneControl::GetSceneMain(){

@@ -1,9 +1,7 @@
 #include "Sound.h"
 namespace alight{
 	Sound::Sound(){};
-	Sound::~Sound(){
-		ofSoundStreamClose();
-	};
+	Sound::~Sound(){};
 	void Sound::setup(ofSimpleApp* p){
 		ofSoundStreamSetup(0,2,p, 44100,BUFFER_SIZE, 4);
 		// ofSoundStreamEnumerateDevices();

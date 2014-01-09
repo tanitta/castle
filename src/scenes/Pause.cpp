@@ -12,10 +12,11 @@ namespace scenes{
 	};	
 	
 	void Pause::update(){
-			cout << "Pause.updated!" <<"\n";
+		// cout << "Pause.updated!" <<"\n";
 	};	
 	
 	void Pause::draw(){
+		// ofSetColor(0xffffff);
 		ofRect(500, 500, 50, 50);
 	};	
 };
