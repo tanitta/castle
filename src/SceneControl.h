@@ -4,6 +4,7 @@
 #include "Network.h"
 #include "scenes/BaseScene.h"
 #include "scenes/Pause.h"
+#include "scenes/Meteorites.h"
 
 #define DISP1_W
 #define DISP1_H 
