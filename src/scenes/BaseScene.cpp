@@ -15,5 +15,14 @@ namespace scenes{
 	void BaseScene::draw(){
 		
 	};	
+	
+	void BaseScene::SetHanSound(alight::SoundData *han){
+		hanSound = han;
+		cout<<"BS SetHanSound:"<<hanSound<<"\n";
+		
+	};
+	void BaseScene::SetHanNetwork(alight::Drawer *han){
+		hanDrawers = han;
+	};
 };
 };

@@ -2,18 +2,19 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	// network.start();
+	network.start();
 	
 	
 	sound.setup(this);
-	// sound.start();	
+	sound.start();	
 	
 	ui.setup();
 	
-	sceneControl.setup();
+	cout<<sound.GetHanSoundData()<<"\n"; //ok
 	sceneControl.SetHanDrawers(network.GetHanDrawer());
-	sceneControl.SetHanSound(&sound);
-	
+	sceneControl.SetHanSound(sound.GetHanSoundData());
+	sceneControl.setup();
+	cout<<sound.GetHanSoundData()<<"\n"; //ok
 }
 
 //--------------------------------------------------------------
@@ -28,28 +29,28 @@ void testApp::draw(){
 	// network.draw();
 	
 	sceneControl.draw();
-	// sceneControl.SetSceneMain();
+	// // sceneControl.SetSceneMain();
 	
-	// alight::Drawer *obj;
-	// obj = network.GetHanDrawer();
+	// // alight::Drawer *obj;
+	// // obj = network.GetHanDrawer();
 	
 	// ofSetHexColor(0xFFFFFF);	
-	// string str;
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	str += "drawers[" + ofToString(i) + "]\n";
-	// 	str += "mouseX : " + ofToString(obj[i].mouseX) + "\n";
-	// 	str += "mouseY : " + ofToString(obj[i].mouseY) + "\n";
-	// 	str += "isDraw : " + ofToString(obj[i].isDraw) + "\n\n";
-	// }
-	// ofDrawBitmapString(str, 20, 256);
-	// int w = 2;
-	// int max = 256;//(int)(BUFFER_SIZE/2);
-	// for (int i = 1; i < max; i++){
-	// 	ofLine(400+(i*w),400,400+(i*w),400-sound.magnitude[i]*10.0f);
-	// }
-	// ofLine(400+(1*w),400,400+(1*w),400+5);
-	// ofLine(400+(max*w),400,400+(max*w),400+5);
+	// // string str;
+	// // for (int i = 0; i < 4; i++)
+	// // {
+	// // 	str += "drawers[" + ofToString(i) + "]\n";
+	// // 	str += "mouseX : " + ofToString(obj[i].mouseX) + "\n";
+	// // 	str += "mouseY : " + ofToString(obj[i].mouseY) + "\n";
+	// // 	str += "isDraw : " + ofToString(obj[i].isDraw) + "\n\n";
+	// // }
+	// // ofDrawBitmapString(str, 20, 256);
+	int w = 2;
+	int max = 256;//(int)(BUFFER_SIZE/2);
+	for (int i = 1; i < max; i++){
+		ofLine(400+(i*w),400,400+(i*w),400-sound.magnitude[i]*1.0f);
+	}
+	ofLine(400+(1*w),400,400+(1*w),400+5);
+	ofLine(400+(max*w),400,400+(max*w),400+5);
 }
 
 //--------------------------------------------------------------

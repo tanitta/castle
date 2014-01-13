@@ -6,6 +6,12 @@
 #define NUM_WINDOWS 80
 
 namespace alight{
+	struct SoundData
+	{
+		float *mid;
+		float magnitude[BUFFER_SIZE];
+		int a;
+	};
 	class Sound : public ofThread{
 		public:
 			Sound();
@@ -38,5 +44,8 @@ namespace alight{
 			
 			float freq[NUM_WINDOWS][BUFFER_SIZE/2];
 			float freq_phase[NUM_WINDOWS][BUFFER_SIZE/2];
+			
+			SoundData soundData;
+			SoundData *GetHanSoundData();
 	};
 }

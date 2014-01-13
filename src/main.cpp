@@ -7,7 +7,8 @@ int main( ){
 	ofAppGLFWWindow win;
 	//win.setNumSamples(8);
 	win.setMultiDisplayFullscreen(true); //this makes the fullscreen window span across all your monitors
-	ofSetupOpenGL(&win, 1920+1024,1080+768, OF_FULLSCREEN);
+	// ofSetupOpenGL(&win, 1920+1024,1080+768, OF_FULLSCREEN);
+	ofSetupOpenGL(&win, 1920+1024,1080+768, OF_WINDOW);
 	
 	
 	// this kicks off the running of my app

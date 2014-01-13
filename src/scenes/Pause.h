@@ -6,7 +6,7 @@ namespace alight{
 namespace scenes{
 	class Pause : public alight::scenes::BaseScene{
 	public:
-		Pause(alight::Sound *hanSound, alight::Drawer *hanDrawers);
+		Pause();
 		~Pause();
 	
 		virtual void setup();
@@ -14,7 +14,7 @@ namespace scenes{
 		virtual void draw();
 		
 	private:
-		alight::Sound* hanSound;
+		alight::SoundData* hanSound;
 		alight::Drawer* hanDrawers;
 	};
 };

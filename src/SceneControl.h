@@ -28,8 +28,8 @@ namespace alight{
 		
 		void ExchangeScene();
 		
-		alight::Sound* hanSound;
-		void SetHanSound(alight::Sound *han);
+		alight::SoundData* hanSound;
+		void SetHanSound(alight::SoundData *han);
 		
 		alight::Drawer* hanDrawers;
 		void SetHanDrawers(alight::Drawer *han);

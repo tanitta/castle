@@ -1,10 +1,7 @@
 #include "Pause.h"
 namespace alight{
 namespace scenes{
-	Pause::Pause(alight::Sound *hanSound, alight::Drawer *hanDrawers){
-		this->hanSound = hanSound;
-		this->hanDrawers = hanDrawers;
-	};
+	Pause::Pause(){};
 	Pause::~Pause(){};
 	
 	void Pause::setup(){

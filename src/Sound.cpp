@@ -9,12 +9,19 @@ namespace alight{
 		this->right = new float[BUFFER_SIZE];
 		this->mid = new float[BUFFER_SIZE];
 		
+		for (int i = 0; i < BUFFER_SIZE; ++i)
+		{
+			mid[i] = 0.0;
+		}
+		
 		
 		for (int i = 0; i < NUM_WINDOWS; i++){
 			for (int j = 0; j < BUFFER_SIZE/2; j++){
 				freq[i][j] = 0;	
 			};
 		};
+		soundData.a = 1;
+		soundData.mid = mid;
 	};
 	void Sound::update(){
 		while( isThreadRunning() != 0 ){
@@ -30,6 +37,8 @@ namespace alight{
 			for(int j=1; j < BUFFER_SIZE/2; j++) {
 				freq[index][j] = magnitude[j];		
 			};
+			
+			soundData.mid = mid;
 		};
 	};
 	void Sound::threadedFunction(){
@@ -38,13 +47,16 @@ namespace alight{
 	}
 	
 	void Sound::audioReceived(float * input, int bufferSize, int nChannels){ 
-	for (int i = 0; i < bufferSize; i++){
-		this->left[i] = input[i*2];
-		this->right[i] = input[i*2+1];
-		this->mid[i] = (this->left[i]+this->right[i])*0.5;
-		
+		for (int i = 0; i < bufferSize; i++){
+			this->left[i] = input[i*2];
+			this->right[i] = input[i*2+1];
+			this->mid[i] = (this->left[i]+this->right[i])*0.5;
+			
+		}
+		bufferCounter++;
 	}
-	bufferCounter++;
-}
+	alight::SoundData *Sound::GetHanSoundData(){
+		return &soundData;
+	}
 }
 
