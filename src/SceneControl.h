@@ -4,6 +4,7 @@
 #include "Network.h"
 #include "scenes/BaseScene.h"
 #include "scenes/Pause.h"
+#include "scenes/Meteorites.h"
 
 namespace alight{
 	class SceneControl{

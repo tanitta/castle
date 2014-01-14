@@ -91,6 +91,9 @@
     <ClCompile Include="src\scenes\Pause.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Meteorites.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -390,6 +393,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\Pause.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Meteorites.h">
       <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 alight::SceneControl::SceneControl(){
 	//add scene to scenes(array) here 
 	scenes[0] = new alight::scenes::Pause(hanSound,hanDrawers);
+	scenes[1] = new alight::scenes::Meteorites(hanSound,hanDrawers);
 	// scenes[1] = new alight::scenes::Meteorites(hanSound,hanDrawers);
 	//etc...
 	
