@@ -1,12 +1,12 @@
 #include "Meteorites.h"
 namespace alight{
 namespace scenes{
-	int Meteorites::stars = 50;
+	int Meteorites::stars = 200;
 	double Meteorites::disTime = 0.02;
-	double Meteorites::grav = 30.0;
-	double Meteorites::sizStar = 2000.0;
+	double Meteorites::grav = 15.0*8;
+	double Meteorites::sizStar = 1000.0;
 	double Meteorites::conC = 200.0;
-	double Meteorites::conR = 0.1;
+	double Meteorites::conR = 0.0;
 	double Meteorites::conBomb = 0.0;//128.0*2000.0;
 	
 	Meteorites::Meteorites(){
@@ -32,28 +32,37 @@ namespace scenes{
 			star[i].SetForce(0.0,0.0);
 			
 			//
-			for (int j = 0; j < stars; ++j)
-			{
-				if (i != j)		
-				{
-					r = pow(pow(star[i].posX-star[j].posX,2.0)+pow(star[i].posY-star[j].posY,2.0),0.5);
-					invr = 1.0/pow(r,3.0);
-					double fx = grav*star[i].mass*star[j].mass*invr*(star[i].posX-star[j].posX);
-					double fy = grav*star[i].mass*star[j].mass*invr*(star[i].posY-star[j].posY);
-					if (star[i].radius + star[j].radius < r){
-						star[i].AddForce(-fx,-fy);
-					}
-					// }else{
-					// 	star[i].AddForce(fx*conR,fy*conR);
-					// 	star[i].AddForce(-(star[i].verX-star[j].verX)*conC, -(star[i].verY-star[j].verY)*conC);
-					// }
+			// for (int j = 0; j < stars; ++j)
+			// {
+			// 	if (i != j)		
+			// 	{
+			// 		r = pow(pow(star[i].posX-star[j].posX,2.0)+pow(star[i].posY-star[j].posY,2.0),0.5);
+			// 		invr = 1.0/pow(r,3.0);
+			// 		double fx = grav*star[i].mass*star[j].mass*invr*(star[i].posX-star[j].posX);
+			// 		double fy = grav*star[i].mass*star[j].mass*invr*(star[i].posY-star[j].posY);
+			// 		if (star[i].radius + star[j].radius < r){
+			// 			star[i].AddForce(-fx,-fy);
+			// 		}
+			// 		// }else{
+			// 		// 	star[i].AddForce(fx*conR,fy*conR);
+			// 		// 	star[i].AddForce(-(star[i].verX-star[j].verX)*conC, -(star[i].verY-star[j].verY)*conC);
+			// 		// }
 					
-					if (star[i].radius + star[j].radius > r*0.66 && star[j].bomb && star[i].GetForAbs()>32.0)
-					{
-						star[i].bomb = true;
-					}
-				}
+			// 		if (star[i].radius + star[j].radius > r*0.66 && star[j].bomb && star[i].GetForAbs()>32.0)
+			// 		{
+			// 			star[i].bomb = true;
+			// 		}
+			// 	}
+			// }
+			
+			r = pow(pow(star[i].posX-star[0].posX,2.0)+pow(star[i].posY-star[0].posY,2.0),0.5);
+			invr = 1.0/pow(r,3.0);
+			double fx = grav*star[i].mass*star[0].mass*invr*(star[i].posX-star[0].posX);
+			double fy = grav*star[i].mass*star[0].mass*invr*(star[i].posY-star[0].posY);
+			if (star[i].radius + star[0].radius < r){
+				star[i].AddForce(-fx,-fy);
 			}
+			
 			
 			if(star[i].GetForAbs() > conBomb){
 				star[i].bomb = true;
@@ -68,7 +77,7 @@ namespace scenes{
 			};
 		};
 		
-		// for (int i = 0; i < stars; ++i) star[i].update();
+		for (int i = 0; i < stars; ++i) star[i].update();
 		
 		for (int i = 0; i < stars; ++i){
 			double resetX = star[i].verX;
@@ -89,7 +98,7 @@ namespace scenes{
 			star[i].SetVelocity(resetX, resetY);
 		};
 		star[0].SetPos(1024.0*0.5,768*0.5);
-		star[0].SetMass(20000 + 100000*(abs(hanSound->mid[0])+abs(hanSound->mid[1])));
+		star[0].SetMass(20000 + 400000*(abs(hanSound->mid[0])+abs(hanSound->mid[1])));
 		for (int i = 1; i < stars; ++i) star[i].update();
 		
 	};	
