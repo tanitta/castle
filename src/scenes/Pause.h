@@ -12,10 +12,7 @@ namespace scenes{
 		virtual void setup();
 		virtual void update();
 		virtual void draw();
-		
-	private:
-		alight::SoundData* hanSound;
-		alight::Drawer* hanDrawers;
+	
 	};
 };
 };

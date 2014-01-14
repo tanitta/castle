@@ -4,6 +4,7 @@ alight::SceneControl::SceneControl(){
 	// cout<<"SC int:"<<hanSound<<"\n";
 	scenes[0] = new alight::scenes::Pause();
 	scenes[1] = new alight::scenes::Meteorites();
+	scenes[2] = new alight::scenes::SevenLED();
 	
 	// scenes[1] = new alight::scenes::Meteorites(hanSound,hanDrawers);
 	//etc...
@@ -19,20 +20,29 @@ void alight::SceneControl::setup(){
 	scenes[1]->SetHanSound(hanSound);
 	scenes[1]->SetHanNetwork(hanDrawers);
 	
+	scenes[2]->SetHanSound(hanSound);
+	scenes[2]->SetHanNetwork(hanDrawers);
+	
 	scenes[0]->setup();
 	scenes[1]->setup();
-
-	cout<<"SC setup:"<<hanSound<<"\n";//ok
+	scenes[2]->setup();
 	
+	ofPushMatrix();
+		ofTranslate(1920.0,0,0);
+		ofSetColor(0);
+		ofRect(0, 0, 1024, 768);
+    ofPopMatrix();
+    
+	cout<<"SC setup:"<<hanSound<<"\n";//ok
 };
 void alight::SceneControl::update(){
-	scenes[1]->update();
+	scenes[2]->update();
 };
 
 void alight::SceneControl::draw(){
 	ofPushMatrix();
 		ofTranslate(1920.0,0,0);
-		scenes[1]->draw();
+		scenes[2]->draw();
     ofPopMatrix();
     
 	ofSetColor(255);

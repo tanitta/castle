@@ -5,7 +5,7 @@
 #include "scenes/BaseScene.h"
 #include "scenes/Pause.h"
 #include "scenes/Meteorites.h"
-
+#include "scenes/SevenLED.h"
 #define DISP1_W
 #define DISP1_H 
 namespace alight{

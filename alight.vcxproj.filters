@@ -94,6 +94,9 @@
     <ClCompile Include="src\scenes\Meteorites.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\SevenLED.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -396,6 +399,9 @@
       <Filter>src\scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\Meteorites.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SevenLED.h">
       <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -144,8 +144,8 @@ namespace scenes{
 		invMass = 1.0/mass;
 		radius = pow(mass*0.3183,0.5);
 	};
-	
 	void Meteorites::Star::SetPos(double x, double y){
+	
 			posX = x;
 			posY = y;
 	};
