@@ -1,7 +1,9 @@
 #include "SevenLED.h"
 namespace alight{
 namespace scenes{
-	SevenLED::SevenLED(){};
+	SevenLED::SevenLED(){
+		mode = 0;
+	};
 	SevenLED::~SevenLED(){};
 	
 	void SevenLED::setup(){
@@ -10,16 +12,34 @@ namespace scenes{
 	};
 	void SevenLED::update(){};
 	void SevenLED::draw(){
-		for (int i = 0; i < 10; ++i)
-		{
-			LEDs(100+i*120,200, GetBits(-1));
-			cout<<GetBits(-1)<<"\n";
-		}
+		ofSetColor(60,220,255);
+		ofRect(0, 0, 1024, 768);
+		switch(mode){
+			case 0:
+		
+			// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";		
+			for (int i = 0; i < 10; ++i)
+			{
+				LEDs(100+i*120,200, GetBits(-1));
+			}
+			
+			case 1:
+			
+			for (int i = 0; i < 10; ++i)
+			{
+				LEDs(100+i*120,200, GetBits(-1));
+			}
+			// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";	
+		};
+		
+		
 	};
 	
 	string SevenLED::GetBits(int n){
 		string s = "";
 		switch(n){
+			case -2:
+				return "0000000";
 			case -1:
 				for (int i = 0; i < 7; ++i)
 				{
@@ -30,7 +50,7 @@ namespace scenes{
 					}
 				}
 				
-				cout<<s<<"\n";
+				// cout<<s<<"\n";
 				return s;
 			case 0:
 				return "1011111";
@@ -65,25 +85,70 @@ namespace scenes{
 	void SevenLED::LEDs(int x, int y, string str){
 		ofPushMatrix();
 			ofTranslate(x,y,0);
-			if (str.substr(0,1)=="1") LED(0,-100);//0
-			if (str.substr(1,1)=="1") LED(0,0);//1
-			if (str.substr(2,1)=="1") LED(0,100);//2
+			if (str.substr(0,1)=="1"){
+				ofSetColor(50,100,120);
+				LED(0,-100);
+			}else{
+				ofSetColor(20,185,220);
+				LED(0,-100);
+			};//0
+			
+			if (str.substr(1,1)=="1"){
+				ofSetColor(50,100,120);
+				LED(0,0);
+			}else{
+				ofSetColor(20,185,220);
+				LED(0,0);
+			}//1
+			
+			if (str.substr(2,1)=="1"){
+				ofSetColor(50,100,120);
+				LED(0,100);
+			}else{
+				ofSetColor(20,185,220);
+				LED(0,100);
+			}//2
 			
 			ofPushMatrix();
 				ofRotateZ(90);
-				if (str.substr(3,1)=="1") LED(-50,50);//3
-				if (str.substr(4,1)=="1") LED(50,50);//4
-				if (str.substr(5,1)=="1") LED(-50,-50);//5
-				if (str.substr(6,1)=="1") LED(50,-50);//6
+				if (str.substr(3,1)=="1"){
+					ofSetColor(50,100,120);
+					LED(-50,50);
+				}else{
+					ofSetColor(20,185,220);
+					LED(-50,50);
+				}//3
+				
+				if (str.substr(4,1)=="1"){
+					ofSetColor(50,100,120);
+					LED(50,50);
+				}else{
+					ofSetColor(20,185,220);
+					LED(50,50);
+				}//4
+				
+				if (str.substr(5,1)=="1"){
+					ofSetColor(50,100,120);
+					LED(-50,-50);
+				}else{
+					ofSetColor(20,185,220);
+					LED(-50,-50);
+				}//5
+				
+				if (str.substr(6,1)=="1"){
+					ofSetColor(50,100,120);
+					LED(50,-50);
+				}else{
+					ofSetColor(20,185,220);
+					LED(50,-50);
+				}//6
 			ofPopMatrix();
-			
 		ofPopMatrix();
 	};
 	
 	void SevenLED::LED(int x, int y){
 		ofPushMatrix();
 			ofTranslate(x,y,0);
-			ofSetColor(255);
 			ofSetPolyMode(OF_POLY_WINDING_NONZERO);
 			ofBeginShape();
 				ofVertex(-w,0);

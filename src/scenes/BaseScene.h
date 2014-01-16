@@ -15,10 +15,12 @@ namespace scenes{
 		void SetHanSound(alight::SoundData *han);
 		void SetHanNetwork(alight::Drawer *han);
 		
+		void SetMode(int);		
 	protected:
-		alight::SoundData* hanSound;
-		alight::Drawer* hanDrawers;
+		int mode;
 		
+		alight::SoundData* hanSound;
+		alight::Drawer* hanDrawers;		
 	};
 };
 };

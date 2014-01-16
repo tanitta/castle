@@ -31,8 +31,12 @@ class testApp : public ofBaseApp{
 		
 		// alight::Network network;
 		alight::Network network;
+		
 		alight::Sound sound;
 		
 		alight::SceneControl sceneControl;
+		
+		ofMutex mutex; 
+		float* specData;
 		
 };

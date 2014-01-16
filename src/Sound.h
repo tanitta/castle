@@ -18,9 +18,11 @@ namespace alight{
 			~Sound();
 			void start(){
 			    startThread(true, false);   // blocking, verbose
+			    
 			}
 
 			void stop(){
+			    ofSoundStreamClose();
 			    stopThread();
 			}
 
@@ -47,5 +49,9 @@ namespace alight{
 			
 			SoundData soundData;
 			SoundData *GetHanSoundData();
+			
+			ofMutex mutex; 
+			float* specData;
+			
 	};
 }

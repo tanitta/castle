@@ -4,6 +4,9 @@
 void testApp::setup(){
 	network.start();
 	
+	specData = new float[BUFFER_SIZE];
+	ofSoundStreamListDevices();
+	ofSoundStreamSetup(0,2,this, 44100,BUFFER_SIZE, 4);
 	
 	sound.setup(this);
 	sound.start();	
@@ -19,7 +22,10 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
+	// mutex.lock();	
 	// sound.update();
+	// mutex.unlock();	
+	
 	sceneControl.update();
 }
 
@@ -56,6 +62,8 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::exit()
 {
+    sound.stop();
+    
     ui.exit();
 }
 
@@ -108,7 +116,8 @@ void testApp::gotMessage(ofMessage msg){
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
-
 void testApp::audioReceived(float * input, int bufferSize, int nChannels){ 
-	sound.audioReceived(input, bufferSize, nChannels);
+	mutex.lock();	
+		sound.audioReceived(input, bufferSize, nChannels);
+	mutex.unlock();
 }

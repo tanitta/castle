@@ -3,7 +3,6 @@ namespace alight{
 	Sound::Sound(){};
 	Sound::~Sound(){};
 	void Sound::setup(ofSimpleApp* p){
-		ofSoundStreamSetup(0,2,p, 44100,BUFFER_SIZE, 4);
 		// ofSoundStreamEnumerateDevices();
 		this->left = new float[BUFFER_SIZE];
 		this->right = new float[BUFFER_SIZE];
@@ -22,9 +21,10 @@ namespace alight{
 		};
 		soundData.a = 1;
 		soundData.mid = mid;
+		specData = new float[BUFFER_SIZE];
+		
 	};
 	void Sound::update(){
-		while( isThreadRunning() != 0 ){
 			// cout << (this->left[0]+this->right[0])*0.5 <<"\n";
 			static int index=0;
 			float avg_power = 0.0f;	
@@ -39,22 +39,28 @@ namespace alight{
 			};
 			
 			soundData.mid = mid;
-		};
 	};
 	void Sound::threadedFunction(){
-		update();
-		ofSleepMillis(10);
+		while( isThreadRunning() != 0 ){
+			update();
+			ofSleepMillis(10);
+		};
+		
 	}
 	
 	void Sound::audioReceived(float * input, int bufferSize, int nChannels){ 
-		for (int i = 0; i < bufferSize; i++){
-			this->left[i] = input[i*2];
-			this->right[i] = input[i*2+1];
-			this->mid[i] = (this->left[i]+this->right[i])*0.5;
-			
+		if( isThreadRunning() != 0 ){
+		// lock();
+				// memcpy(specData, input, sizeof(float) * bufferSize);
+				for (int i = 0; i < BUFFER_SIZE; i++){
+					this->left[i] = input[i*2];
+					this->right[i] = input[i*2+1];
+					this->mid[i] = (this->left[i]+this->right[i])*0.5;
+				}
+		// unlock();
 		}
-		bufferCounter++;
 	}
+	
 	alight::SoundData *Sound::GetHanSoundData(){
 		return &soundData;
 	}

@@ -24,5 +24,9 @@ namespace scenes{
 	void BaseScene::SetHanNetwork(alight::Drawer *han){
 		hanDrawers = han;
 	};
+	
+	void BaseScene::SetMode(int n){
+		mode = n;
+	}
 };
 };
