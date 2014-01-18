@@ -6,7 +6,7 @@
 #include "SceneControl.h"
 #include "ofxUI.h"
 #include "ui/UI.h"
-
+#include "Keyboard.h"
 
 class testApp : public ofBaseApp{
 	public:
@@ -24,6 +24,8 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		void audioReceived(float *input, int bufferSize, int nChannels); 
+		
+		alight::Keyboard keyboard;
 		
 		alight::ui::UI ui;
 	    void exit(); 

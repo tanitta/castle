@@ -56,7 +56,7 @@ namespace scenes{
 			// }
 			
 			r = pow(pow(star[i].posX-star[0].posX,2.0)+pow(star[i].posY-star[0].posY,2.0),0.5);
-			invr = 1.0/pow(r,3.0);
+			invr = 1.0/pow(r,4.0);
 			double fx = grav*star[i].mass*star[0].mass*invr*(star[i].posX-star[0].posX);
 			double fy = grav*star[i].mass*star[0].mass*invr*(star[i].posY-star[0].posY);
 			if (star[i].radius + star[0].radius < r){
@@ -98,7 +98,8 @@ namespace scenes{
 			star[i].SetVelocity(resetX, resetY);
 		};
 		star[0].SetPos(1024.0*0.5,768*0.5);
-		star[0].SetMass(20000 + 400000*(abs(hanSound->mid[0])+abs(hanSound->mid[1])));
+		cout<<"mag:"<<hanSound->magnitude[2]<<"\n";
+		star[0].SetMass(20000 + hanSound->magnitude[2]*2000);
 		for (int i = 1; i < stars; ++i) star[i].update();
 		
 	};	

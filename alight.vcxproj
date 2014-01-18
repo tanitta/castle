@@ -91,12 +91,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\fft.cpp" />
+    <ClCompile Include="src\Keyboard.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Network.cpp" />
     <ClCompile Include="src\SceneControl.cpp" />
     <ClCompile Include="src\scenes\BaseScene.cpp" />
     <ClCompile Include="src\scenes\Meteorites.cpp" />
     <ClCompile Include="src\scenes\Pause.cpp" />
+    <ClCompile Include="src\scenes\Ribbons.cpp" />
     <ClCompile Include="src\scenes\SevenLED.cpp" />
     <ClCompile Include="src\Sound.cpp" />
     <ClCompile Include="src\testApp.cpp" />
@@ -125,10 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\fft.h" />
+    <ClInclude Include="src\Keyboard.h" />
     <ClInclude Include="src\SceneControl.h" />
     <ClInclude Include="src\scenes\BaseScene.h" />
     <ClInclude Include="src\scenes\Meteorites.h" />
     <ClInclude Include="src\scenes\Pause.h" />
+    <ClInclude Include="src\scenes\Ribbons.h" />
     <ClInclude Include="src\scenes\SevenLED.h" />
     <ClInclude Include="src\Sound.h" />
     <ClInclude Include="src\testApp.h" />

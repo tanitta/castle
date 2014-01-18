@@ -9,7 +9,7 @@ namespace alight{
 	struct SoundData
 	{
 		float *mid;
-		float magnitude[BUFFER_SIZE];
+		float *magnitude;
 		int a;
 	};
 	class Sound : public ofThread{

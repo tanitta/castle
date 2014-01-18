@@ -21,6 +21,7 @@ namespace alight{
 		};
 		soundData.a = 1;
 		soundData.mid = mid;
+		soundData.magnitude = magnitude;
 		specData = new float[BUFFER_SIZE];
 		
 	};

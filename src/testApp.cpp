@@ -2,6 +2,10 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+	ofSetFrameRate(60);
+	
+	keyboard.setup();
+	
 	network.start();
 	
 	specData = new float[BUFFER_SIZE];
@@ -17,20 +21,23 @@ void testApp::setup(){
 	sceneControl.SetHanDrawers(network.GetHanDrawer());
 	sceneControl.SetHanSound(sound.GetHanSoundData());
 	sceneControl.setup();
-	cout<<sound.GetHanSoundData()<<"\n"; //ok
+	// cout<<sound.GetHanSoundData()<<"\n"; //ok
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	// mutex.lock();	
-	// sound.update();
-	// mutex.unlock();	
-	
+	keyboard.update();
+	sceneControl.SetSceneSelect(keyboard.GetSceneSelect());
+	sceneControl.SetModeSelect(keyboard.GetModeSelect());
 	sceneControl.update();
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	ofSetColor(0);
+	ofRect(0, 0, 1920, 1080);
+	ofPopMatrix();
+	
 	ofSetHexColor(0x000000);
 	// network.draw();
 	
@@ -53,8 +60,15 @@ void testApp::draw(){
 	int w = 2;
 	int max = 256;//(int)(BUFFER_SIZE/2);
 	for (int i = 1; i < max; i++){
-		ofLine(400+(i*w),400,400+(i*w),400-sound.magnitude[i]*1.0f);
+		if(i%16 == 0){
+			ofSetColor(60,220,255);
+		}else{
+			ofSetColor(255,255,255);
+		};
+		ofLine(400+(i*w),402,400+(i*w),400-sound.magnitude[i]*1.0f);
 	}
+	
+	ofSetColor(255);
 	ofLine(400+(1*w),400,400+(1*w),400+5);
 	ofLine(400+(max*w),400,400+(max*w),400+5);
 }
@@ -75,10 +89,19 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
 	ui.keyPressed(key);
+	keyboard.SetKeyPressed(key);
+  //   cout << "Scene:" << keyboard.GetSceneSelect()<<"\n";
+  //   cout << "Mode:" << keyboard.GetModeSelect()<<"\n";
+    
+	 // cout << "P:" << key <<"\n";
+	
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
+	keyboard.SetKeyReleased(key);
+	//  cout << "R:" << key <<"\n";
+	
 
 }
 

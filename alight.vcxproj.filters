@@ -97,6 +97,12 @@
     <ClCompile Include="src\scenes\SevenLED.cpp">
       <Filter>src\scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\Keyboard.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\Ribbons.cpp">
+      <Filter>src\scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -402,6 +408,12 @@
       <Filter>src\scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\SevenLED.h">
+      <Filter>src\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Keyboard.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Ribbons.h">
       <Filter>src\scenes</Filter>
     </ClInclude>
   </ItemGroup>

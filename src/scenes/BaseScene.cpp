@@ -1,7 +1,9 @@
 #include "BaseScene.h"
 namespace alight{
 namespace scenes{
-	BaseScene::BaseScene(){};
+	BaseScene::BaseScene(){
+		mode = 0;
+	};
 	BaseScene::~BaseScene(){};
 	
 	void BaseScene::setup(){
@@ -27,6 +29,28 @@ namespace scenes{
 	
 	void BaseScene::SetMode(int n){
 		mode = n;
+	}
+	
+	double BaseScene::SetStepVal(double a, double b, double d){
+		double c;
+		if(b-a>0){
+			c = a+abs(d);
+			if (b-c<0)
+			{
+				c = b;
+			}
+		}else if (b-a<0)
+		{
+			c = a-abs(d);
+			if (b-c>0)
+			{
+				c = b;
+			}
+		}else{
+			c = b;
+		}
+		
+		return c;
 	}
 };
 };

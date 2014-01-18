@@ -6,64 +6,83 @@ alight::SceneControl::SceneControl(){
 	scenes[1] = new alight::scenes::Meteorites();
 	scenes[2] = new alight::scenes::SevenLED();
 	
+	scenes[3] = new alight::scenes::Ribbons();
+	scenes[4] = new alight::scenes::Pause();
+	scenes[5] = new alight::scenes::Pause();
+	scenes[6] = new alight::scenes::Pause();
+	scenes[7] = new alight::scenes::Pause();
+	scenes[8] = new alight::scenes::Pause();
+	scenes[9] = new alight::scenes::Pause();
+	
+	
 	// scenes[1] = new alight::scenes::Meteorites(hanSound,hanDrawers);
 	//etc...
 	
-	
+	sceneSelect = 0;
+	modeSelect = 0;
 };
 alight::SceneControl::~SceneControl(){};
 
 void alight::SceneControl::setup(){
-	scenes[0]->SetHanSound(hanSound);
-	scenes[0]->SetHanNetwork(hanDrawers);
+	viewport.x = 1920;
+	viewport.y = 0;
+	viewport.width = 1024;
+	viewport.height = 768;
 	
-	scenes[1]->SetHanSound(hanSound);
-	scenes[1]->SetHanNetwork(hanDrawers);
-	
-	scenes[2]->SetHanSound(hanSound);
-	scenes[2]->SetHanNetwork(hanDrawers);
-	
-	scenes[0]->setup();
-	scenes[1]->setup();
-	scenes[2]->setup();
-	
-	ofPushMatrix();
-		ofTranslate(1920.0,0,0);
-		ofSetColor(0);
-		ofRect(0, 0, 1024, 768);
-    ofPopMatrix();
+	for (int i = 0; i < 10; ++i)
+	{
+		scenes[i]->SetHanSound(hanSound);
+		scenes[i]->SetHanNetwork(hanDrawers);	/* code */
+		scenes[i]->setup();
+		
+	}
     
 	cout<<"SC setup:"<<hanSound<<"\n";//ok
 };
 void alight::SceneControl::update(){
-	scenes[2]->update();
+	scenes[sceneSelect]->SetMode(modeSelect);
+	// cout<<"SceneControl"<<modeSelect<<"\n";
+	scenes[sceneSelect]->update();
 };
 
 void alight::SceneControl::draw(){
-	ofPushMatrix();
-		ofTranslate(1920.0,0,0);
-		scenes[2]->draw();
-    ofPopMatrix();
+	// ofPushMatrix();
+	// 	ofTranslate(1920.0,0,0);
+	// 	scenes[sceneSelect]->draw();
+	// ofPopMatrix();
     
+	
+	
+	
+	// keep a copy of your viewport and transform matrices for later
+	ofPushView();
+		// tell OpenGL to change your viewport. note that your transform matrices will now need setting up
+		ofViewport(viewport);
+
+		// setup transform matrices for normal oF-style usage, i.e.
+		//  0,0=left,top
+		//  ofGetViewportWidth(),ofGetViewportHeight()=right,bottom
+		ofSetupScreen();
+
+		scenes[sceneSelect]->draw();
+		
+	// restore the old viewport (now full view and oF coords)
+	ofPopView();
+	
+	
+	
 	ofSetColor(255);
-    string fpsStr = "frame rate: "+ofToString(ofGetFrameRate(), 2);
+	string fpsStr = "frame rate: "+ofToString(ofGetFrameRate(), 2);
 	ofDrawBitmapString(fpsStr, 100,100);
 };
 
-ofImage alight::SceneControl::GetSceneMain(){
-	return imageMain;
-};
+void alight::SceneControl::SetSceneSelect(int i){
+	sceneSelect = i;
+}
 
-void alight::SceneControl::SetSceneMain(){
-	// imageMain.grabScreen(0, 0, 1024, 768);
-};
-
-ofImage alight::SceneControl::GetSceneSub(){
-	return imageSub;
-};
-
-void alight::SceneControl::ExchangeScene(){
-};
+void alight::SceneControl::SetModeSelect(int i){
+	modeSelect = i;
+}
 
 void alight::SceneControl::SetHanSound(alight::SoundData *han){
 	hanSound = han;

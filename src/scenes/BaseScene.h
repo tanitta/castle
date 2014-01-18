@@ -15,7 +15,9 @@ namespace scenes{
 		void SetHanSound(alight::SoundData *han);
 		void SetHanNetwork(alight::Drawer *han);
 		
-		void SetMode(int);		
+		void SetMode(int n);	
+		
+		double SetStepVal(double a, double b, double d);	
 	protected:
 		int mode;
 		

@@ -14,22 +14,73 @@ namespace scenes{
 	void SevenLED::draw(){
 		ofSetColor(60,220,255);
 		ofRect(0, 0, 1024, 768);
+		int h = 120;
+		// cout<<"LEDmode:"<<mode<<"\n";
+		
 		switch(mode){
 			case 0:
-		
-			// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";		
-			for (int i = 0; i < 10; ++i)
-			{
-				LEDs(100+i*120,200, GetBits(-1));
-			}
+				ofPushMatrix();
+				ofTranslate(720,700,0);
+					ofScale(0.2,0.2,1.0);
+					// cout<<(int)abs(hanSound->mid[0]*10.0)<<"\n";		
+					for (int i = 0; i < 10; ++i){
+						LEDs(100+i*120,200, GetBits(-1));
+					}
+
+					
+					// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";	
+				ofPopMatrix();
+			break;
 			
 			case 1:
+				ofPushMatrix();
+					ofScale(1,1,1.0);
+					LEDs(130,h, GetBits(2));
+					LEDs(130*2,h, GetBits(0));
+					LEDs(130*3,h, GetBits(1));
+					LEDs(130*4,h, GetBits(4));
+					LEDs(130*5,h, GetBits(-2));
+					LEDs(130*6,h, GetBits(-2));
+					
+					LEDs(130*5,h+230, GetBits(-2));
+					LEDs(130*6,h+230, GetBits(1));
+					
+					LEDs(130*5,h+230*2, GetBits(1));
+					LEDs(130*6,h+230*2, GetBits(9));
+				ofPopMatrix();
+			break;
 			
-			for (int i = 0; i < 10; ++i)
-			{
-				LEDs(100+i*120,200, GetBits(-1));
-			}
-			// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";	
+			case 2:
+				ofPushMatrix();
+					ofScale(1,1,1.0);
+					LEDs(130,h, GetBits(-1));
+					LEDs(130*2,h, GetBits(-1));
+					LEDs(130*3,h, GetBits(-1));
+					LEDs(130*4,h, GetBits(-1));
+					LEDs(130*5,h, GetBits(-1));
+					LEDs(130*6,h, GetBits(-1));
+					
+					LEDs(130*5,h+230, GetBits(-1));
+					LEDs(130*6,h+230, GetBits(-1));
+					
+					LEDs(130*5,h+230*2, GetBits(-1));
+					LEDs(130*6,h+230*2, GetBits(-1));
+				ofPopMatrix();
+			break;
+			
+			case 3:
+				ofPushMatrix();
+					ofScale(0.5,0.5,1.0);
+					
+					cout<<(int)abs(hanSound->mid[0]*10.0)<<"\n";		
+					for (int i = 0; i < 15; ++i){
+						for (int j = 0; j < 6; ++j){
+							LEDs(100+i*130,200+j*230, GetBits(-1));
+						}
+					}
+					// cout<<(int)abs(hanSound->mid[0]*80.0)<<"\n";	
+				ofPopMatrix();
+			break;
 		};
 		
 		
@@ -89,7 +140,7 @@ namespace scenes{
 				ofSetColor(50,100,120);
 				LED(0,-100);
 			}else{
-				ofSetColor(20,185,220);
+				ofSetColor(0,210,255);
 				LED(0,-100);
 			};//0
 			
@@ -97,7 +148,7 @@ namespace scenes{
 				ofSetColor(50,100,120);
 				LED(0,0);
 			}else{
-				ofSetColor(20,185,220);
+				ofSetColor(0,210,255);
 				LED(0,0);
 			}//1
 			
@@ -105,7 +156,7 @@ namespace scenes{
 				ofSetColor(50,100,120);
 				LED(0,100);
 			}else{
-				ofSetColor(20,185,220);
+				ofSetColor(0,210,255);
 				LED(0,100);
 			}//2
 			
@@ -115,7 +166,7 @@ namespace scenes{
 					ofSetColor(50,100,120);
 					LED(-50,50);
 				}else{
-					ofSetColor(20,185,220);
+					ofSetColor(0,210,255);
 					LED(-50,50);
 				}//3
 				
@@ -123,7 +174,7 @@ namespace scenes{
 					ofSetColor(50,100,120);
 					LED(50,50);
 				}else{
-					ofSetColor(20,185,220);
+					ofSetColor(0,210,255);
 					LED(50,50);
 				}//4
 				
@@ -131,7 +182,7 @@ namespace scenes{
 					ofSetColor(50,100,120);
 					LED(-50,-50);
 				}else{
-					ofSetColor(20,185,220);
+					ofSetColor(0,210,255);
 					LED(-50,-50);
 				}//5
 				
@@ -139,7 +190,7 @@ namespace scenes{
 					ofSetColor(50,100,120);
 					LED(50,-50);
 				}else{
-					ofSetColor(20,185,220);
+					ofSetColor(0,210,255);
 					LED(50,-50);
 				}//6
 			ofPopMatrix();
