@@ -1,0 +1,7 @@
+bin/
+obj/
+
+/.gitattributes
+*.log
+*.sublime-workspace
+*.sublime-project
