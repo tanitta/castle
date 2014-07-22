@@ -326,5 +326,41 @@
 		<Unit filename="../../../addons/ofxUI/src/ofxUIOFWrapper.h">
 			<Option virtualFolder="addons/ofxUI/src" />
 		</Unit>
+		<Unit filename="src/scenes/VoidScene.hpp">
+			<Option virtualFolder="src/scenes" />
+		</Unit>
+		<Unit filename="src/scenes/BaseScene.hpp">
+			<Option virtualFolder="src/scenes" />
+		</Unit>
+		<Unit filename="src/ofApp.hpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src/frame/SceneContainer.hpp">
+			<Option virtualFolder="src/frame" />
+		</Unit>
+		<Unit filename="src/frame/SceneControler.hpp">
+			<Option virtualFolder="src/frame" />
+		</Unit>
+		<Unit filename="src/interface/GUI.hpp">
+			<Option virtualFolder="src/interface" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/src" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.h">
+			<Option virtualFolder="addons/ofxXmlSettings/libs" />
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>

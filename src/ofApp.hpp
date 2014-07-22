@@ -11,7 +11,7 @@ class ofApp : public ofBaseApp{
 		alight::interface::GUI gui;
 		void setup(){
 			gui.setup();
-			
+					
 		};
 		void update(){};
 		void draw(){};
