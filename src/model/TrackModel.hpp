@@ -1,3 +1,4 @@
+#pragma once
 #include"SceneModel.hpp"
 namespace alight{
 namespace model{
