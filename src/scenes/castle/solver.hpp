@@ -8,13 +8,19 @@ namespace alight {
 	namespace scenes {
 		namespace castle {
 			class Solver {
-				Eigen::Vector3i field_size_;
+				alight::scenes::castle::Grid* grid_ptr_;
 				public:
-					Solver(){field_size_<< 20, 20, 20;};
+					Solver(){};
 					virtual ~Solver(){};
 					void set(alight::scenes::castle::Grid& grid_ref){
+						grid_ptr_ = &grid_ref;
 					};
-					void update(){};
+					void setup(){
+						grid_ptr_->setup();
+					}
+					void update(){
+						grid_ptr_->update();
+					};
 			};
 		} // namespace castle
 	} // namespace scenes

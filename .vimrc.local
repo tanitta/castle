@@ -1,0 +1,6 @@
+set tags+=../../../libs/openFrameworks/tags
+let g:marching_include_paths = filter(
+			\ split(glob('~/dev/openFrameworks/libs/openFrameworks/'), '\n')+
+			\ split(glob('~/dev/openFrameworks/libs/openFrameworks/*'), '\n')+
+			\ split(glob(getcwd().'/src/'), '\n'),
+			\ 'isdirectory(v:val)')
