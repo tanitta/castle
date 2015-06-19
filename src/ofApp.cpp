@@ -5,6 +5,8 @@ void ofApp::setup(){
 	current_scene_id_ = 0;
 	
 	scene.setup();
+	ofBackground(32);
+	// ofSetFrameRate(1);
 }
 
 //--------------------------------------------------------------

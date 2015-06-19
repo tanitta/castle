@@ -9,7 +9,7 @@ namespace alight {
 				alight::scenes::castle::Grid grid_;
 				ofEasyCam camera_;
 				public:
-					Core():grid_(Eigen::Vector3i(10,3,3)){};
+					Core():grid_(Eigen::Vector3i(20,20,20)){};
 					virtual ~Core(){};
 					void setup(){
 						solver_.set(grid_);
@@ -19,7 +19,7 @@ namespace alight {
 					};
 					void draw(){
 						camera_.begin();
-							ofDrawGrid(100,100,100);
+							// ofDrawGrid(100,100,100);
 							grid_.draw();
 						camera_.end();
 					};
