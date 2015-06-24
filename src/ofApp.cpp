@@ -5,8 +5,9 @@ void ofApp::setup(){
 	current_scene_id_ = 0;
 	
 	scene.setup();
-	ofBackground(32);
+	ofBackground(0);
 	// ofSetFrameRate(1);
+	ofEnableDepthTest();
 }
 
 //--------------------------------------------------------------
@@ -36,7 +37,7 @@ void ofApp::stop_current_scene(){
 };
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	scene.keyPressed(key);
 }
 
 //--------------------------------------------------------------

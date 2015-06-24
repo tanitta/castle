@@ -19,7 +19,6 @@ namespace alight {
 						grid_ptr_->setup();
 					}
 					void update(){
-						std::cout<<"--------------------------------"<<std::endl;
 						grid_ptr_->update();
 					};
 			};
