@@ -201,9 +201,9 @@ namespace alight {
 					
 				public:
 				void draw(){
-					double scale = 80.0;
+					double scale = 10;
 					if(type_ == CellType::Fluid){;
-						ofDrawIcoSphere(u_[0]*scale,u_[1]*scale,u_[2]*scale,0.2);
+						ofDrawIcoSphere(u_[0]*scale,u_[1]*scale,u_[2]*scale,0.1);
 						// ofDrawLine(
 						// 		u_[0]*scale,u_[1]*scale,u_[2]*scale,
 						// 		u_[0]*scale*0.7,u_[1]*scale*0.7,u_[2]*scale*0.7);
@@ -211,7 +211,7 @@ namespace alight {
 								u_[0]*scale,u_[1]*scale,u_[2]*scale,
 								0,0,0);
 					}else{
-						ofDrawIcoSphere(0,0,0,2.5);
+						ofDrawIcoSphere(0,0,0,0.5);
 					}
 				};
 			};

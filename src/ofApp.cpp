@@ -2,12 +2,13 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofEnableAlphaBlending();
+	// ofEnableDepthTest();
 	current_scene_id_ = 0;
 	
 	scene.setup();
-	ofBackground(0);
+	ofBackground(32);
 	// ofSetFrameRate(1);
-	ofEnableDepthTest();
 }
 
 //--------------------------------------------------------------
@@ -17,8 +18,13 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	// ofEnableDepthTest();
 	scene.draw();
 }
+
+void ofApp::exit(){
+	scene.exit();
+};
 
 void ofApp::start_scene(const int scene_number){
 	

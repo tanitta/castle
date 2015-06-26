@@ -151,7 +151,7 @@ namespace alight {
 					};
 
 					void setup(){
-						set_box_boudary_condition(Eigen::Vector3i(5,size()[1]/2-5,size()[2]/2-6),Eigen::Vector3i(6,size()[1]/2+5,size()[2]/2+6));
+						set_box_boudary_condition(Eigen::Vector3i(7,size()[1]/2-5,size()[2]/2-6),Eigen::Vector3i(8,size()[1]/2+5,size()[2]/2+6));
 						// set_box_boudary_condition(Eigen::Vector3i(2,2,-7),Eigen::Vector3i(6,6,6));
 					};
 
@@ -188,7 +188,7 @@ namespace alight {
 										ofSetColor(0);
 									};
 									ofPushMatrix();
-									ofTranslate(i*5,j*5,k*5);
+									ofTranslate(i,j,k);
 									cell(i,j,k).draw();
 									ofPopMatrix();
 								}
