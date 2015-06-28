@@ -46,15 +46,25 @@ namespace alight {
 					}
 						
 					void draw(const ofEasyCam& camera){
-						// ofSetColor(ofColor::fromHsb(0,0,brightness_,90));
-						ofDrawIcoSphere(0,0,0,1);
+						ofVec3f camera_position = camera.getPosition();
+						ofVec3f camera_direction_from_particle = camera_position - ofVec3f(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
+						double theta_z = std::atan2(camera_direction_from_particle[0],camera_direction_from_particle[1]);
+						double distance_of_camera_and_particle_in_xy_plane = std::sqrt(
+								std::pow( camera_direction_from_particle[0],2 )+
+								std::pow( camera_direction_from_particle[1],2 )
+								);
+						double theta_x = std::atan2(camera_direction_from_particle[2],distance_of_camera_and_particle_in_xy_plane);
+						
+						// ofDrawIcoSphere(0,0,0,1);
 						ofVec3f position(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
 						ofPushMatrix();
-						// ofScale(0.004*image_size_,0.004*image_size_,0.004*image_size_);
-						ofScale(0.05,0.05,0.05);
-						// ofRotate(image_angle_,0,0,1);
-						ofTranslate(-256,-256,0);
-						image_2_.draw(0,0);
+							ofRotate(ofRadToDeg(-theta_z),0,0,1);
+							ofRotate(ofRadToDeg(theta_x),1,0,0);
+							ofScale(0.004*image_size_,0.004*image_size_,0.004*image_size_);
+							ofRotate(90,1,0,0);
+							ofRotate(image_angle_,0,0,1);
+							ofTranslate(-256,-256,0);
+							image_2_.draw(0,0);
 						ofPopMatrix();
 					};
 			};

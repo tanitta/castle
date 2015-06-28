@@ -50,11 +50,11 @@ namespace alight {
 					
 					Cloud load_image_cloud;
 					load_image_cloud.load_images();
-					for (int i = 0; i < 6; i++) {
+					for (int i = 0; i < 6000; i++) {
 						Cloud cloud;
 						// cloud.setup();
 						cloud.particle_.position_<<ofRandom(0,world_size_[0]-1), ofRandom(0,world_size_[1]-1), ofRandom(0,ofRandom(0,world_size_[2]-1));
-						cloud.image_size_ = ofRandom(0.5,8);
+						cloud.image_size_ = ofRandom(1,10);
 						cloud.image_angle_= ofRandom(0,360);
 						clouds_.push_back(cloud);
 					}
@@ -122,6 +122,7 @@ namespace alight {
 				
 				void draw(){
 					camera_.begin();
+					ofDrawGrid(10,10,10);
 					ofDisableDepthTest();
 					sort_clouds();
 					for (auto&& cloud : clouds_) {
@@ -142,7 +143,7 @@ namespace alight {
 						double brightness = 255.0 - shading_rate*255.0;
 						cloud.close_brightness_to(brightness,1);
 						ofPushMatrix();
-						ofTranslate(x*0.5,y*0.5,z*0.5);
+						ofTranslate(x,y,z);
 						cloud.draw(camera_);
 						ofPopMatrix();
 					}
