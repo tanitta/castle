@@ -1,1 +1,4 @@
 ofxBillboard
+ofx3DModelLoader
+ofxAssimpModelLoader
+ofxOsc

@@ -1,9 +1,14 @@
 #pragma once
 #include "ofMain.h"
+
+#include "value_box.hpp"
+#include "network_gate.hpp"
+
 #include "solver.hpp"
 #include "pharticle/pharticle.hpp";
-#include <cloud.hpp>
-#include "thread";
+#include "cloud.hpp"
+#include "thread"
+#include "tower.hpp"
 namespace alight {
 	namespace scenes {
 		namespace castle {
@@ -21,8 +26,15 @@ namespace alight {
 				ofEasyCam camera_;
 				std::thread thread_;
 				int thread_counter_;
+				
+				Tower tower_;
+				
+				variable_controller::ValueBox vb_;
+				variable_controller::NetworkGate network_gate_;
+				
 				public:
 				Core():
+					network_gate_(vb_),
 					mesh_size_(Eigen::Vector3i(120,80,2)),
 					world_size_(mesh_size_[0],mesh_size_[1],mesh_size_[2]*10),
 					grid_(mesh_size_),
@@ -32,6 +44,10 @@ namespace alight {
 				virtual ~Core(){};
 
 				void setup(){
+					network_gate_.connect(8090,8080);
+					
+					tower_.setup();
+					
 					Cloud load_image_cloud;
 					load_image_cloud.load_images();
 					for (int i = 0; i < 6000; i++) {
@@ -44,11 +60,19 @@ namespace alight {
 					}
 					grid_.setup();
 					flow_solver_.set(grid_);
-					thread_ = std::thread([=]{this->flow_solver_.update();});
+					thread_ = std::thread([=]{this->update_flow();});
 				};
+				void update_flow(){
+					while(true){
+						flow_solver_.update();
+					}
+				};
+				
 				void update(){
+					network_gate_.receive();
+					
 					for (auto&& cloud : clouds_) {
-						cloud.particle_.velocity_ = grid_.cell(cloud.position_in_mesh()[0],cloud.position_in_mesh()[1],0).u_*0.2;
+						cloud.particle_.velocity_ = grid_.cell(cloud.position_in_mesh()[0],cloud.position_in_mesh()[1],0).u_*0.5;
 						cloud.particle_.velocity_[1] *= (double)cloud.position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
 						cloud.particle_.velocity_[0] *= (double)cloud.position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
 						cloud.particle_.integrate();
@@ -77,13 +101,14 @@ namespace alight {
 					for (auto&& cloud : clouds_) {
 						cloud_density_grid_[cloud.position_in_mesh()[0]][cloud.position_in_mesh()[1]][cloud.position_in_mesh()[2]] += cloud.image_size_;
 					}
-					if(thread_counter_ == 0){
-						thread_counter_ = 0;
-						thread_.join();
-						thread_ = std::thread([=]{this->flow_solver_.update();});
-					};
+					// if(thread_counter_ == 0){
+					// 	thread_counter_ = 0;
+					// 	thread_.join();
+					// 	thread_ = std::thread(update_flow);
+					// };
 					// thread_counter_++;
 				};
+				
 				void sort_clouds(){
 					ofVec3f camera_position = camera_.getPosition();
 					std::sort(clouds_.begin(),clouds_.end(),[=](Cloud& a, Cloud& b)->bool{
@@ -117,12 +142,18 @@ namespace alight {
 						double brightness = 255.0 - shading_rate*255.0;
 						cloud.close_brightness_to(brightness,1);
 						ofPushMatrix();
-						ofTranslate(x,y,z);
+						ofTranslate(x*0.5,y*0.5,z*0.5);
 						cloud.draw(camera_);
 						ofPopMatrix();
 					}
 					ofEnableDepthTest();
 					
+					ofPushMatrix();
+					ofTranslate(11,40,-40);
+					ofScale(0.25,0.25,0.25);
+					ofSetColor(0,0,0,255);
+					tower_.draw();
+					ofPopMatrix();
 					// grid_.draw();
 					camera_.end();
 				};

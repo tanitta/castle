@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofEnableAlphaBlending();
+	// ofEnableAlphaBlending();
 	// ofEnableDepthTest();
 	current_scene_id_ = 0;
 	

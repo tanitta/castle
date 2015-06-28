@@ -51,9 +51,9 @@ namespace alight {
 						ofVec3f position(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
 						ofxBillboardBeginSpherical(camera.getPosition(),position);
 						ofPushMatrix();
-						ofScale(0.01*image_size_,0.01*image_size_,0.01*image_size_);
-						ofRotate(image_angle_,0,0,1);
-						ofTranslate(-256,-256,0);
+						ofScale(0.004*image_size_,0.004*image_size_,0.004*image_size_);
+						// ofRotate(image_angle_,0,0,1);
+						// ofTranslate(-256,-256,0);
 						image_2_.draw(0,0);
 						ofPopMatrix();
 						ofxBillboardEnd();

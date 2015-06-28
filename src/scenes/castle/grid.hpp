@@ -151,7 +151,9 @@ namespace alight {
 					};
 
 					void setup(){
-						set_box_boudary_condition(Eigen::Vector3i(7,size()[1]/2-5,size()[2]/2-6),Eigen::Vector3i(8,size()[1]/2+5,size()[2]/2+6));
+						set_box_boudary_condition(
+								Eigen::Vector3i(7,size()[1]/2-10,size()[2]/2-6),
+								Eigen::Vector3i(17,size()[1]/2+10,size()[2]/2+6));
 						// set_box_boudary_condition(Eigen::Vector3i(2,2,-7),Eigen::Vector3i(6,6,6));
 					};
 
