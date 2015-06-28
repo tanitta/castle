@@ -45,18 +45,17 @@ namespace alight {
 						};
 					}
 						
-					void draw(ofEasyCam& camera){
+					void draw(const ofEasyCam& camera){
 						// ofSetColor(ofColor::fromHsb(0,0,brightness_,90));
-						// ofDrawIcoSphere(0,0,0,0.3);
+						ofDrawIcoSphere(0,0,0,1);
 						ofVec3f position(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
-						ofxBillboardBeginSpherical(camera.getPosition(),position);
 						ofPushMatrix();
-						ofScale(0.004*image_size_,0.004*image_size_,0.004*image_size_);
+						// ofScale(0.004*image_size_,0.004*image_size_,0.004*image_size_);
+						ofScale(0.05,0.05,0.05);
 						// ofRotate(image_angle_,0,0,1);
-						// ofTranslate(-256,-256,0);
+						ofTranslate(-256,-256,0);
 						image_2_.draw(0,0);
 						ofPopMatrix();
-						ofxBillboardEnd();
 					};
 			};
 		} // namespace castle

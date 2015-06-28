@@ -50,7 +50,7 @@ namespace alight {
 					
 					Cloud load_image_cloud;
 					load_image_cloud.load_images();
-					for (int i = 0; i < 6000; i++) {
+					for (int i = 0; i < 6; i++) {
 						Cloud cloud;
 						// cloud.setup();
 						cloud.particle_.position_<<ofRandom(0,world_size_[0]-1), ofRandom(0,world_size_[1]-1), ofRandom(0,ofRandom(0,world_size_[2]-1));
@@ -60,7 +60,7 @@ namespace alight {
 					}
 					grid_.setup();
 					flow_solver_.set(grid_);
-					thread_ = std::thread([=]{this->update_flow();});
+					// thread_ = std::thread([=]{this->update_flow();});
 				};
 				void update_flow(){
 					while(true){
@@ -169,7 +169,7 @@ namespace alight {
 				}
 				
 				void exit(){
-					thread_.join();
+					// thread_.join();
 				};
 			};
 		} // namespace castle
