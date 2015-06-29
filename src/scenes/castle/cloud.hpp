@@ -1,13 +1,14 @@
 #pragma once
-#include "ofMain.h";
-#include "pharticle/pharticle.hpp";
-#include "Eigen/Core";
+#include "ofMain.h"
+#include "pharticle/pharticle.hpp"
+#include "Eigen/Core"
 #include "entity.hpp"
 
 namespace alight {
 	namespace scenes {
 		namespace castle {
 			class Cloud : public Entity{
+					ofCamera* camera_ptr_;
 				public:
 					static ofImage image_2_;
 					static ofImage image_3_;
@@ -16,7 +17,6 @@ namespace alight {
 					double image_angle_;
 					double image_size_;
 					double brightness_;
-					// pharticle::Particle particle_;
 					
 					Cloud():image_size_(1),image_angle_(0),brightness_(0){};
 					
@@ -36,18 +36,23 @@ namespace alight {
 						// image_2_.loadImage("scenes/castle/cloud2.png");
 					};
 					
-					void close_brightness_to(double target_brightness, double rate){
-						if(brightness_-rate<target_brightness && brightness_-target_brightness>-rate){
-							brightness_ = target_brightness;
-						}else if(brightness_<target_brightness){
-							brightness_+=rate;
-						}else if(brightness_>target_brightness){
-							brightness_-=rate;
-						};
-					}
+					// void close_brightness_to(double target_brightness, double rate){
+					// 	if(brightness_-rate<target_brightness && brightness_-target_brightness>-rate){
+					// 		brightness_ = target_brightness;
+					// 	}else if(brightness_<target_brightness){
+					// 		brightness_+=rate;
+					// 	}else if(brightness_>target_brightness){
+					// 		brightness_-=rate;
+					// 	};
+					// }
+					
+					void set_camera_ptr(ofEasyCam* camera_ptr){
+						camera_ptr_ = camera_ptr;
+					};
+					
 						
-					void draw(const ofEasyCam& camera){
-						ofVec3f camera_position = camera.getPosition();
+					void draw(){
+						ofVec3f camera_position = camera_ptr_->getPosition();
 						ofVec3f camera_direction_from_particle = camera_position - ofVec3f(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
 						double theta_z = std::atan2(camera_direction_from_particle[0],camera_direction_from_particle[1]);
 						double distance_of_camera_and_particle_in_xy_plane = std::sqrt(
@@ -56,6 +61,9 @@ namespace alight {
 								);
 						double theta_x = std::atan2(camera_direction_from_particle[2],distance_of_camera_and_particle_in_xy_plane);
 						
+						ofSetColor(ofColor::fromHsb(0,0,brightness_,90));
+						std::cout<<brightness_<<std::endl;
+						// ofSetColor(ofColor::fromHsb(0,0,255,90));
 						// ofDrawIcoSphere(0,0,0,1);
 						ofVec3f position(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
 						ofPushMatrix();

@@ -1,13 +1,16 @@
 #pragma once
 #include "ofMain.h"
+#include "pharticle/pharticle.hpp";
 
 #include "value_box.hpp"
 #include "network_gate.hpp"
 
 #include "solver.hpp"
-#include "pharticle/pharticle.hpp";
+#include "entity.hpp"
+#include "entity_renderer.hpp"
+
 #include "cloud.hpp"
-#include "thread"
+#include <thread>
 #include "tower.hpp"
 namespace alight {
 	namespace scenes {
@@ -19,15 +22,18 @@ namespace alight {
 				alight::scenes::castle::Grid grid_;
 				alight::scenes::castle::Solver flow_solver_;
 				
+				std::vector<std::shared_ptr<Entity>> entity_ptrs_;
+				EntityRenderer entity_renderer_;
+				
 				pharticle::Engine particle_solver_;
-				std::vector<alight::scenes::castle::Cloud> clouds_;
+				std::vector<std::shared_ptr<alight::scenes::castle::Cloud>> cloud_sptrs_;
 				std::vector<std::vector<std::vector<double>>> cloud_density_grid_;;
 				
 				ofEasyCam camera_;
 				std::thread thread_;
 				int thread_counter_;
 				
-				Tower tower_;
+				std::shared_ptr<Tower> tower_sptr;
 				
 				variable_controller::ValueBox vb_;
 				variable_controller::NetworkGate network_gate_;
@@ -39,6 +45,7 @@ namespace alight {
 					world_size_(mesh_size_[0],mesh_size_[1],mesh_size_[2]*10),
 					grid_(mesh_size_),
 					thread_counter_(0),
+					tower_sptr(new Tower),
 					cloud_density_grid_(world_size_[0],std::vector<std::vector<double>>(world_size_[1],std::vector<double>(world_size_[2]))){};
 
 				virtual ~Core(){};
@@ -47,22 +54,27 @@ namespace alight {
 					network_gate_.connect(8090,8080);
 					network_gate_.receive();
 					
-					tower_.setup();
+					tower_sptr->setup();
+					tower_sptr->particle_.position_<<11.0, 40.0, 0.0;
+					entity_renderer_.add_entity(tower_sptr);
 					
 					Cloud load_image_cloud;
 					load_image_cloud.load_images();
-					for (int i = 0; i < 6000; i++) {
-						Cloud cloud;
-						// cloud.setup();
-						cloud.particle_.position_<<ofRandom(0,world_size_[0]-1), ofRandom(0,world_size_[1]-1), ofRandom(0,ofRandom(0,world_size_[2]-1));
-						cloud.image_size_ = ofRandom(1,10);
-						cloud.image_angle_= ofRandom(0,360);
-						clouds_.push_back(cloud);
+					for (int i = 0; i < 1000; i++) {
+						std::shared_ptr<Cloud> cloud_sptr(new Cloud);
+						
+						cloud_sptr->particle_.position_<<ofRandom(0,world_size_[0]-1), ofRandom(0,world_size_[1]-1), ofRandom(0,ofRandom(0,world_size_[2]-1));
+						cloud_sptr->image_size_ = ofRandom(1,10);
+						cloud_sptr->image_angle_= ofRandom(0,360);
+						cloud_sptr->set_camera_ptr(&camera_);
+						cloud_sptrs_.push_back(cloud_sptr);
+						entity_renderer_.add_entity(cloud_sptr);
 					}
 					grid_.setup();
 					flow_solver_.set(grid_);
 					// thread_ = std::thread([=]{this->update_flow();});
 				};
+				
 				void update_flow(){
 					while(true){
 						flow_solver_.update();
@@ -71,25 +83,27 @@ namespace alight {
 				
 				void update(){
 					network_gate_.receive();
-					
-					for (auto&& cloud : clouds_) {
-						cloud.particle_.velocity_ = grid_.cell(cloud.position_in_mesh()[0],cloud.position_in_mesh()[1],0).u_*0.5;
-						cloud.particle_.velocity_[1] *= (double)cloud.position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
-						cloud.particle_.velocity_[0] *= (double)cloud.position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
-						cloud.particle_.integrate();
+						flow_solver_.update();
+					for (auto&& cloud_sptr : cloud_sptrs_) {
+						cloud_sptr->particle_.velocity_ = grid_.cell(cloud_sptr->position_in_mesh()[0],cloud_sptr->position_in_mesh()[1],0).u_*0.5;
+						cloud_sptr->particle_.velocity_[1] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
+						cloud_sptr->particle_.velocity_[0] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
+						cloud_sptr->particle_.integrate();
 						
-						if(cloud.position_in_mesh()[0]>=world_size_[0]){
-							cloud.particle_.position_[0] = 0.0;
+						if(cloud_sptr->position_in_mesh()[0]>=world_size_[0]){
+							cloud_sptr->particle_.position_[0] = 0.0;
 						};
 						
-						if(cloud.position_in_mesh()[1]<0||world_size_[1]<=cloud.position_in_mesh()[1]){
-							cloud.particle_.position_[0] = 0.0;
-							cloud.particle_.position_[1] = ofRandom(0,world_size_[1]-1);
+						if(cloud_sptr->position_in_mesh()[1]<0||world_size_[1]<=cloud_sptr->position_in_mesh()[1]){
+							cloud_sptr->particle_.position_[0] = 0.0;
+							cloud_sptr->particle_.position_[1] = ofRandom(0,world_size_[1]-1);
 						};
-						if(cloud.position_in_mesh()[2]<0||world_size_[2]<=cloud.position_in_mesh()[2]){
-							cloud.particle_.position_[0] = 0.0;
-							cloud.particle_.position_[2] =ofRandom(0,ofRandom(0,world_size_[2]-1));
+						if(cloud_sptr->position_in_mesh()[2]<0||world_size_[2]<=cloud_sptr->position_in_mesh()[2]){
+							cloud_sptr->particle_.position_[0] = 0.0;
+							cloud_sptr->particle_.position_[2] =ofRandom(0,ofRandom(0,world_size_[2]-1));
 						};
+						double z = cloud_sptr->particle_.position_[2];
+						cloud_sptr->brightness_ = (float)z/(float)world_size_[2]*90.0 +(256.0-90.0);
 					}
 					for (auto&& i : cloud_density_grid_) {
 						for (auto&& j : i) {
@@ -99,63 +113,20 @@ namespace alight {
 						}
 					}
 					
-					for (auto&& cloud : clouds_) {
-						cloud_density_grid_[cloud.position_in_mesh()[0]][cloud.position_in_mesh()[1]][cloud.position_in_mesh()[2]] += cloud.image_size_;
+					for (auto&& cloud_sptr : cloud_sptrs_) {
+						cloud_density_grid_[cloud_sptr->position_in_mesh()[0]][cloud_sptr->position_in_mesh()[1]][cloud_sptr->position_in_mesh()[2]] += cloud_sptr->image_size_;
 					}
-					// if(thread_counter_ == 0){
-					// 	thread_counter_ = 0;
-					// 	thread_.join();
-					// 	thread_ = std::thread(update_flow);
-					// };
-					// thread_counter_++;
+					tower_sptr->particle_.position_[0] = (float)world_size_[0]*vb_.get_float_ref("midi_control_20");
+					tower_sptr->particle_.position_[2] = (float)world_size_[2]*vb_.get_float_ref("midi_control_21");
 				};
-				
-				void sort_clouds(){
-					ofVec3f camera_position = camera_.getPosition();
-					std::sort(clouds_.begin(),clouds_.end(),[=](Cloud& a, Cloud& b)->bool{
-							ofVec3f cloud_position_a(a.particle_.position_[0],a.particle_.position_[1],a.particle_.position_[2]);
-							ofVec3f cloud_position_b(b.particle_.position_[0],b.particle_.position_[1],b.particle_.position_[2]);
-							float distance_a = camera_position.distance(cloud_position_a);
-							float distance_b = camera_position.distance(cloud_position_b);
-							return distance_a>distance_b;
-							});
-				}
 				
 				void draw(){
 					camera_.begin();
 					ofDrawGrid(10,10,10);
 					ofDisableDepthTest();
-					sort_clouds();
-					for (auto&& cloud : clouds_) {
-						int x_i = cloud.position_in_mesh()[0];
-						int y_i = cloud.position_in_mesh()[1];
-						int z_i = cloud.position_in_mesh()[2];
-						
-						double shading_rate = 0.0;//cloud_density_grid_[x_i][y_i][z_i];
-						for (int h = z_i+1; h < world_size_[2]; h++) {
-							shading_rate += cloud_density_grid_[x_i][y_i][h]*(1.0-(double)(h-z_i-1)/(double)(world_size_[2]-1-z_i-1));
-						}
-						shading_rate = shading_rate/10;
-						double x = cloud.particle_.position_[0];
-						double y = cloud.particle_.position_[1];
-						double z = cloud.particle_.position_[2];
-						ofSetColor(ofColor::fromHsb(0,0,(float)z/(float)world_size_[2]*60 +(256.0-90.0),90));
-						// ofSetColor(ofColor::fromHsb(0,0,255.0 - shading_rate*255.0));
-						double brightness = 255.0 - shading_rate*255.0;
-						cloud.close_brightness_to(brightness,1);
-						ofPushMatrix();
-						ofTranslate(x,y,z);
-						cloud.draw(camera_);
-						ofPopMatrix();
-					}
+					entity_renderer_.draw(camera_);
 					ofEnableDepthTest();
 					
-					ofPushMatrix();
-					ofTranslate(11,40,-40);
-					ofScale(0.25,0.25,0.25);
-					ofSetColor(0,0,0,255);
-					tower_.draw();
-					ofPopMatrix();
 					// grid_.draw();
 					camera_.end();
 				};
