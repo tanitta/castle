@@ -45,6 +45,7 @@ namespace alight {
 
 				void setup(){
 					network_gate_.connect(8090,8080);
+					network_gate_.receive();
 					
 					tower_.setup();
 					

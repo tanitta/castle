@@ -2,11 +2,12 @@
 #include "ofMain.h";
 #include "pharticle/pharticle.hpp";
 #include "Eigen/Core";
-#include <ofxBillboard.h>
+#include "entity.hpp"
+
 namespace alight {
 	namespace scenes {
 		namespace castle {
-			class Cloud {
+			class Cloud : public Entity{
 				public:
 					static ofImage image_2_;
 					static ofImage image_3_;
@@ -15,9 +16,9 @@ namespace alight {
 					double image_angle_;
 					double image_size_;
 					double brightness_;
-					pharticle::Particle particle_;
+					// pharticle::Particle particle_;
 					
-					Cloud():particle_(),image_size_(1),image_angle_(0),brightness_(0){};
+					Cloud():image_size_(1),image_angle_(0),brightness_(0){};
 					
 					virtual ~Cloud(){};
 					
