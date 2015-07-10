@@ -12,10 +12,18 @@
 #include "cloud.hpp"
 #include <thread>
 #include "tower.hpp"
+
+#include "field.hpp"
+
+#include "boid.hpp"
+
 namespace alight {
 	namespace scenes {
 		namespace castle {
 			class Core {
+				variable_controller::ValueBox vb_;
+				variable_controller::NetworkGate network_gate_;
+				
 				const Eigen::Vector3i mesh_size_;
 				const Eigen::Vector3i world_size_;
 				
@@ -29,23 +37,25 @@ namespace alight {
 				std::vector<std::shared_ptr<alight::scenes::castle::Cloud>> cloud_sptrs_;
 				std::vector<std::vector<std::vector<double>>> cloud_density_grid_;;
 				
+				std::vector<std::shared_ptr<Boid>> boid_sptrs_;
+				
 				ofEasyCam camera_;
 				std::thread thread_;
 				int thread_counter_;
 				
 				std::shared_ptr<Tower> tower_sptr;
+				std::shared_ptr<Field> field_sptr;
 				
-				variable_controller::ValueBox vb_;
-				variable_controller::NetworkGate network_gate_;
 				
 				public:
 				Core():
 					network_gate_(vb_),
-					mesh_size_(Eigen::Vector3i(120,80,2)),
+					mesh_size_(Eigen::Vector3i(140,80,2)),
 					world_size_(mesh_size_[0],mesh_size_[1],mesh_size_[2]*10),
 					grid_(mesh_size_),
 					thread_counter_(0),
 					tower_sptr(new Tower),
+					field_sptr(new Field),
 					cloud_density_grid_(world_size_[0],std::vector<std::vector<double>>(world_size_[1],std::vector<double>(world_size_[2]))){};
 
 				virtual ~Core(){};
@@ -55,8 +65,12 @@ namespace alight {
 					network_gate_.receive();
 					
 					tower_sptr->setup();
-					tower_sptr->particle_.position_<<11.0, 40.0, 0.0;
+					tower_sptr->particle_.position_<<40.0, 40.0, 0.0;
 					entity_renderer_.add_entity(tower_sptr);
+					
+					field_sptr->setup();
+					field_sptr->particle_.position_<<0,0,0;
+					entity_renderer_.add_entity(field_sptr);
 					
 					Cloud load_image_cloud;
 					load_image_cloud.load_images();
@@ -73,6 +87,7 @@ namespace alight {
 					grid_.setup();
 					flow_solver_.set(grid_);
 					// thread_ = std::thread([=]{this->update_flow();});
+					entity_renderer_.setup();
 				};
 				
 				void update_flow(){
@@ -83,9 +98,11 @@ namespace alight {
 				
 				void update(){
 					network_gate_.receive();
-						flow_solver_.update();
+					
+					flow_solver_.update();
+					
 					for (auto&& cloud_sptr : cloud_sptrs_) {
-						cloud_sptr->particle_.velocity_ = grid_.cell(cloud_sptr->position_in_mesh()[0],cloud_sptr->position_in_mesh()[1],0).u_*0.5;
+						cloud_sptr->particle_.velocity_ = grid_.cell(cloud_sptr->position_in_mesh()[0],cloud_sptr->position_in_mesh()[1],0).u_*2.0*vb_.get_float_ref("midi_control_23");
 						cloud_sptr->particle_.velocity_[1] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
 						cloud_sptr->particle_.velocity_[0] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
 						cloud_sptr->particle_.integrate();
@@ -98,35 +115,26 @@ namespace alight {
 							cloud_sptr->particle_.position_[0] = 0.0;
 							cloud_sptr->particle_.position_[1] = ofRandom(0,world_size_[1]-1);
 						};
+						
 						if(cloud_sptr->position_in_mesh()[2]<0||world_size_[2]<=cloud_sptr->position_in_mesh()[2]){
 							cloud_sptr->particle_.position_[0] = 0.0;
 							cloud_sptr->particle_.position_[2] =ofRandom(0,ofRandom(0,world_size_[2]-1));
 						};
+						
 						double z = cloud_sptr->particle_.position_[2];
 						cloud_sptr->brightness_ = (float)z/(float)world_size_[2]*90.0 +(256.0-90.0);
-					}
-					for (auto&& i : cloud_density_grid_) {
-						for (auto&& j : i) {
-							for (auto&& cloud_density : j) {
-								cloud_density = 0.0;
-							}
-						}
+						cloud_sptr->opacity_ = vb_.get_float_ref("midi_control_22")*255.0;
 					}
 					
-					for (auto&& cloud_sptr : cloud_sptrs_) {
-						cloud_density_grid_[cloud_sptr->position_in_mesh()[0]][cloud_sptr->position_in_mesh()[1]][cloud_sptr->position_in_mesh()[2]] += cloud_sptr->image_size_;
-					}
 					tower_sptr->particle_.position_[0] = (float)world_size_[0]*vb_.get_float_ref("midi_control_20");
 					tower_sptr->particle_.position_[2] = (float)world_size_[2]*vb_.get_float_ref("midi_control_21");
 				};
 				
 				void draw(){
 					camera_.begin();
-					ofDrawGrid(10,10,10);
-					ofDisableDepthTest();
-					entity_renderer_.draw(camera_);
-					ofEnableDepthTest();
+					// ofDrawGrid(10,10,10);
 					
+					entity_renderer_.draw(camera_);
 					// grid_.draw();
 					camera_.end();
 				};

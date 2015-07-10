@@ -3,11 +3,11 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	// ofEnableAlphaBlending();
-	// ofEnableDepthTest();
+	ofEnableDepthTest();
 	current_scene_id_ = 0;
 	
 	scene.setup();
-	ofBackground(32);
+	ofBackground(64);
 	// ofSetFrameRate(1);
 }
 

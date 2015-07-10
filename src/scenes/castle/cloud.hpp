@@ -17,8 +17,9 @@ namespace alight {
 					double image_angle_;
 					double image_size_;
 					double brightness_;
+					double opacity_;
 					
-					Cloud():image_size_(1),image_angle_(0),brightness_(0){};
+					Cloud():image_size_(1),image_angle_(0),brightness_(0),opacity_(90){};
 					
 					virtual ~Cloud(){};
 					
@@ -61,11 +62,10 @@ namespace alight {
 								);
 						double theta_x = std::atan2(camera_direction_from_particle[2],distance_of_camera_and_particle_in_xy_plane);
 						
-						ofSetColor(ofColor::fromHsb(0,0,brightness_,90));
-						std::cout<<brightness_<<std::endl;
-						// ofSetColor(ofColor::fromHsb(0,0,255,90));
-						// ofDrawIcoSphere(0,0,0,1);
+						ofSetColor(ofColor::fromHsb(0,0,brightness_,opacity_));
 						ofVec3f position(particle_.position_[0],particle_.position_[1],particle_.position_[2]);
+						
+						
 						ofPushMatrix();
 							ofRotate(ofRadToDeg(-theta_z),0,0,1);
 							ofRotate(ofRadToDeg(theta_x),1,0,0);
@@ -75,6 +75,11 @@ namespace alight {
 							ofTranslate(-256,-256,0);
 							image_2_.draw(0,0);
 						ofPopMatrix();
+						
+						ofNoFill();
+						ofSetColor(ofColor::fromHsb(0,0,brightness_,opacity_*0.1));
+						// ofDrawIcoSphere(ofVec3f(0,0,0),image_size_);
+						ofFill();
 					};
 			};
 		} // namespace castle

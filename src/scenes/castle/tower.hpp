@@ -1,11 +1,11 @@
 #pragma one
-#include "pharticle/pharticle.hpp";
+#include "pharticle/pharticle.hpp"
 #include "ofxAssimpModelLoader.h"
-#include "entity.hpp"<`0`>
+#include "entity.hpp"
 namespace alight {
 	namespace scenes {
 		namespace castle {
-			class Tower : public Entity{
+			class Tower : public alight::scenes::castle::Entity{
 				ofxAssimpModelLoader model_;
 				public:
 				Tower(){};
@@ -18,13 +18,22 @@ namespace alight {
 				
 				void draw(){
 					ofPushMatrix();
-					ofTranslate(0,0,-20);
+					ofTranslate(0,0,-10);
 					ofScale(0.25,0.25,0.25);
-					ofSetColor(0,0,0,255);
-					model_.draw(OF_MESH_POINTS);
+					ofSetColor(250,252,255,255);
+					ofMesh mesh = model_.getCurrentAnimatedMesh(0);
+					
+					ofMesh mesh_face =  mesh;
+					mesh_face.removeIndex(5);
+					mesh_face.removeIndex(6);
+					mesh_face.drawFaces();
+					
+					ofSetColor(ofColor::fromHsb(0,0,128));
+					mesh.drawWireframe();
+					for (auto&& vertex : mesh.getVertices()) {
+						ofDrawIcoSphere(vertex,1.0);
+					}
 					ofPopMatrix();
-
-
 				};
 			};
 		} // namespace castle
