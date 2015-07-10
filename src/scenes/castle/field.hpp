@@ -21,7 +21,7 @@ namespace alight {
 				void draw(){
 					
 					ofPushMatrix();
-					ofTranslate(70,40,0);
+					// ofTranslate(70,40,0);
 					ofScale(0.5,0.5,0.5);
 					ofRotate(90,1,0,0);
 							

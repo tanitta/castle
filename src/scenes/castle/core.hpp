@@ -65,7 +65,7 @@ namespace alight {
 					network_gate_.receive();
 					
 					tower_sptr->setup();
-					tower_sptr->particle_.position_<<40.0, 40.0, 0.0;
+					tower_sptr->particle_.position_<<0.0, 0.0, 0.0;
 					entity_renderer_.add_entity(tower_sptr);
 					
 					field_sptr->setup();
@@ -103,7 +103,7 @@ namespace alight {
 					
 					for (auto&& cloud_sptr : cloud_sptrs_) {
 						cloud_sptr->particle_.velocity_ = grid_.cell(cloud_sptr->position_in_mesh()[0],cloud_sptr->position_in_mesh()[1],0).u_*2.0*vb_.get_float_ref("midi_control_23");
-						cloud_sptr->particle_.velocity_[1] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
+						cloud_sptr->particle_.velocity_[1] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.1+0.95;
 						cloud_sptr->particle_.velocity_[0] *= (double)cloud_sptr->position_in_mesh()[2]/(double)world_size_[2]*0.05+0.95;
 						cloud_sptr->particle_.integrate();
 						
